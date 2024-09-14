@@ -1,0 +1,77 @@
+Meeting Minutes
+
+Meeting Details
+Date: 14th of September 2024
+Time: 12:00-13:00
+Location: Discord Server Voice Channel
+Attendees: Benjamin, Jordan, Anthony, Ella, Mustafa, Mehrad
+Absent: None
+
+Agenda
+- Create user stories from the project description and sprint 1's requirements.
+- Discuss high-level design for implementing sprint 1 features.
+- Discuss members' backgrounds and familiarity with different web development topics.
+
+
+Discussion Points
+- Item 1: Documenting Meeting Minutes
+	Decisions Made: Meeting minutes will follow a set template. Each meeting, a different group member will be
+	delegated as the meeting's secretary and will be responsible for documenting minutes.
+
+- Item 2: GitHub Repository Use
+	Discussion Summary: The team discussed whether to have everyone committing to the 'master' branch, for each member to commit to their
+	own branch (and merge complete and functioning code to 'master'), or to have branches for different functionality (and merge complete and functioning code to 'master')
+	Decisions Made: The GitHub repository should have branches corresponding to the different sides of the application. The 'master' branch
+	will be reserved for complete and functioning code.
+
+- Item 2: Team 6 Members' Familiarity with Web Development Concepts and practices
+	Discussion Summary: 4 members of our team have taken a web programming course, and 2 team members have no web development
+	experience. 4 members have done basic database programming using MongoDB and have worked with HTML, CSS, and Javascript.
+	Decisions Made: 
+	Action Items: Each team member should fill in a shared document indicating their experience and preferred roles for this project.
+
+- Item 3: Dividing programming responsibilities
+	Discussion Summary:
+		Options for dividing work:
+		- Two team members could handle the login feature, simplifying communication and coordinating a shared codebase.
+		- Each feature could be split into its UI, server-side, and database components. Each of these components would be delegated
+		to a pair of programmers (2 members implement UI, 2 members implement the application's server-side behaviour, and 2 members
+		implement the system's database).
+	Decisions Made: Each feature could be split into its UI, server-side, and database components. Each of these components will be delegated
+	to a pair of programmers. 
+
+- Item 4: User Stories
+	Discussion Summary: The group split the three core features of sprint 1 (Login system, team creation and assignment, making teams visible) into several user stories.
+
+- Item 5: Design Issue: How to differentiate student and faculty accounts
+	Discussion Summary: 
+		System design options:
+		- Faculty could request an instructor account from the administrator, which would give them instructor privileges
+		- Instructors and students could sign in with their university emails, allowing the system to differentiate them based on their
+		email format (e.g., concordia students have an @mail.concordia.ca account, whereas faculty have a @concordia.ca account)
+		- Instructors and students could sign in with their university netnames, allowing the system to differentiate them based on their
+		netname format (e.g., concordia students have an F_LASTNAME, whereas faculty have a FLASTNAME netname)
+	Decisions Made: None
+	Action Items: Continue this discussion in meeting 2.
+
+
+Action Items
+- Action Item 1: Complete Members' Preferred Project Roles on Google Sheets
+	Assignee: All
+	Due Date: Thursday 19th of September
+
+
+Next Steps
+Upcoming Meetings: Next Thursday during the lab (Thursday 19th of September). Next Saturday (tentatively, Saturday 21st of September).
+
+Other Important Dates: Sprint 1 is due by Sunday 29th of September (15 days from today).
+
+Additional Notes
+None
+
+Adjournment
+Time: 13:30
+
+Attachments
+Sprint 1 Plan and User Stories: https://docs.google.com/spreadsheets/d/1ozaMjaeOTEgtV9U4M3ek0Z_PJC4Lt4VAN3ONpwH12xY/edit?gid=0#gid=0
+Members' Preferred Project Roles: https://docs.google.com/spreadsheets/d/1Oq3KV8tEmA3mTNtqpsNKc6BiPeTDcDdNtmp7xgBD-GE/edit?gid=0#gid=0
