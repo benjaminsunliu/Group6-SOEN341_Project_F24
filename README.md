@@ -9,4 +9,7 @@ This project is a peer assessment system designed for university team projects. 
 • Anthony Phelps <br>
 • Ella Noyes <br>
 • Mustafa Al Awadi <br>
-• Mehrad Mostaan <br>
+• Mehrad Mostaan <be>
+
+Access the Sprint Backlogs with the following link:
+[View the Sprint Backlogs](https://docs.google.com/spreadsheets/d/1ozaMjaeOTEgtV9U4M3ek0Z_PJC4Lt4VAN3ONpwH12xY/edit?usp=sharing)
