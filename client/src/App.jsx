@@ -7,6 +7,7 @@ import CreateAccount from "./pages/CreateAccount";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InstructorDashboard from "./pages/InstructorDashboard";
+import Button from "./components/Button";
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/create-account" element={<CreateAccount />}></Route>
-            <Route path="/instructor-dashboard" element={<InstructorDashboard />}></Route>
+            <Route
+              path="/instructor-dashboard"
+              element={<InstructorDashboard />}
+            ></Route>
           </Routes>
         </body>
         <Footer />
