@@ -13,7 +13,7 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <body class="d-flex h-100 text-center">
+        <body>
           {" "}
           {/* can change text-bg-dark to text-bg-light */}
           <Routes>
