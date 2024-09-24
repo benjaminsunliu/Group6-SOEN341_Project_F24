@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors'); //Allows interaction between different origins
 
 const app = express();
-const port = 5000;
+const port = 5050;
 
 // Use CORS middleware
 app.use(cors());
