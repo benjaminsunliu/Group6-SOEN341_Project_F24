@@ -2,6 +2,7 @@ import "./InstructorDashboard.css";
 import TabBar from "../components/TabContainer";
 import StudentTable from "../components/StudentTable";
 import Button from "../components/Button";
+import SingleFileUploader from "../components/SingleFileUploader";
 
 const InstructorDashboard = (props) => {
 
@@ -45,7 +46,8 @@ const InstructorDashboard = (props) => {
       label: "Students", 
       content: 
         <div class="Dashboard-contents">
-          <StudentTable tableContents={{ headers: tableHeaders, contents: students}}/>
+          {/*<StudentTable tableContents={{ headers: tableHeaders, contents: students}}/>*/}
+          <SingleFileUploader fileDescription="Course Roster" fileExtension=".csv"/>
         </div> 
     },
     { id: "groups", 
