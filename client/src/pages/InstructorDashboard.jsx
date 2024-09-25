@@ -44,21 +44,21 @@ const InstructorDashboard = (props) => {
     { id: "students", 
       label: "Students", 
       content: 
-        <div>
+        <div class="Dashboard-contents">
           <StudentTable tableContents={{ headers: tableHeaders, contents: students}}/>
         </div> 
     },
     { id: "groups", 
       label: "Groups", 
       content: 
-        <div>
+        <div class="Dashboard-contents">
           Groups go here
         </div> },
     {
       id: "assessments",
       label: "Assessments",
       content: 
-        <div>
+        <div class="Dashboard-contents"> 
           Peer assessments go here
         </div>,
     },
@@ -68,7 +68,7 @@ const InstructorDashboard = (props) => {
   return (
     <>
       <h1 class="Dashboard-header">Course Name</h1>
-      <div class="Dashboard-contents">
+      <div>
       <TabBar tabs={tabsData} />
       </div>
 
