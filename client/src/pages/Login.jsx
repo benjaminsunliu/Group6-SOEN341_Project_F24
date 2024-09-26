@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Login = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginHandler = () => {
+    alert(`Logged into an account with ${email} ${password}`);
+}
+
   return (
     <div class="container" style={{ padding: "13% 0%" }}>
       <main class="form-signin m-auto" style={{ width: "25%" }}>
-        <form>
+        <form onSubmit={loginHandler}>
           <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
           <div class="form-floating">
@@ -13,6 +21,7 @@ const Login = (props) => {
               class="form-control"
               id="floatingInput"
               placeholder="name@example.com"
+              onChange={(e) => setEmail(e.target.value)} 
             />
             <label for="floatingInput">Email address</label>
           </div>
@@ -22,6 +31,7 @@ const Login = (props) => {
               class="form-control"
               id="floatingPassword"
               placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <label for="floatingPassword">Password</label>
           </div>

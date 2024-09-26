@@ -3,6 +3,7 @@ import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
 import SingleFileUploader from "../components/SingleFileUploader";
 import GroupForm from "../components/GroupForm"
+import StudentTable from "../components/StudentTable";
 
 const InstructorDashboard = (props) => {
 
@@ -45,8 +46,8 @@ const InstructorDashboard = (props) => {
       label: "Students", 
       content: 
         <div class="Dashboard-contents">
-          {/*<StudentTable tableContents={{ headers: tableHeaders, contents: students}}/>*/}
-          <SingleFileUploader fileDescription="Course Roster" fileExtension=".csv"/>
+          <StudentTable tableContents={{ headers: tableHeaders, contents: students}}/>
+          {/*<SingleFileUploader fileDescription="Course Roster" fileExtension=".csv"/>*/}
         </div> 
     },
     { id: "groups", 

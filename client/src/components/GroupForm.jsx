@@ -26,7 +26,7 @@ const GroupForm = ({ students }) => {
     }
 
     const formGroup = () => {
-        
+
         // TODO: Server-side logic for group creation
 
         if(groupMembers.length > 0) {

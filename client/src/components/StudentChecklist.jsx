@@ -1,3 +1,4 @@
+// TODO: Figure out how to combine students and selectionHandler as prop
 const StudentChecklist = ({ students, selectionHandler }) => {
     return (
         <>
