@@ -1,7 +1,7 @@
 const StudentTable = ({ tableContents }) => {
 
-  const headers = tableContents.headers;
-  const contents = tableContents.contents;
+const headers = tableContents.headers;
+const contents = tableContents.contents;
 
   return (
       <table className="table table-striped" style={{textAlign: "left"}}>
