@@ -4,7 +4,7 @@
 const { MongoClient } = require('mongodb');
 
 // Replace the connection string with the one provided by MongoDB Atlas
-const uri = "mongodb+srv://login:moon@logincluster.thvtn.mongodb.net/?retryWrites=true&w=majority&appName=LoginCluster";
+const uri = "";
 
 const client = new MongoClient(uri);
 
