@@ -18,17 +18,17 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Connect to MongoDB 
-mongoose.connect('mongodb://', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-});
+mongoose.connect("mongodb+srv://login:moon@logincluster.thvtn.mongodb.net/?retryWrites=true&w=majority&appName=LoginCluster", {
+}).then(() => console.log('MongoDB connected successfully.'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 // JWT secret
 const jwtSecret = 'your_jwt_secret';
 
 // User schema with roles (student or instructor)
 const userSchema = new mongoose.Schema({
+  fName: { type: String, required: true },
+  lName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['student', 'instructor'], required: true }
@@ -41,6 +41,10 @@ userSchema.pre('save', async function (next) {
   }
   next();
 });
+
+const database = mongoose.connection;
+
+const usersCollection = database.collection('users');
 
 const User = mongoose.model('User', userSchema);
 
@@ -94,16 +98,27 @@ app.post('/api/login', async (req, res) => {
 
 // User registration route
 app.post('/api/create-account', async (req, res) => {
-  const { email, password, role } = req.body;
+  const {fName, lName, email, password, role} = req.body;
 
   try {
-    const user = new User({ email, password, role });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log(`Account creation failed: ${email} is already in use.`);
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+
+    const user = new User({fName, lName, email, password, role});
     await user.save();
+
+    console.log(`Account created successfully for ${email}.`);
     res.status(201).json({ message: 'Account created successfully!' });
   } catch (error) {
-    res.status(400).json({ message: 'Error creating account', error });
+    console.error('Error creating account:', error);
+    res.status(500).json({ message: 'Error creating account', error });
   }
 });
+
+
 
 // Instructor route to create teams
 app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) => {
