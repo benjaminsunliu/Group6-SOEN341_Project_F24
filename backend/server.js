@@ -6,6 +6,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const csv = require('csv-parser');
+const cookieParser = require('cookie-parser');
 const fs = require('fs');
 
 // Initialize express app
@@ -13,8 +14,12 @@ const app = express();
 const port = 5050;
 
 // Use middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow requests from your frontend origin
+  credentials: true, // Enable cookies to be sent with requests
+}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Connect to MongoDB 
@@ -59,9 +64,8 @@ const Team = mongoose.model('Team', teamSchema);
 
 // Middleware to authenticate JWT tokens
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (!token) return res.sendStatus(401);
+  const token = req.cookies.token;  // Access token from the cookie
+  if (!token) return res.sendStatus(401); // No token, unauthorized
 
   jwt.verify(token, jwtSecret, (err, user) => {
     if (err) return res.sendStatus(403);
@@ -90,7 +94,19 @@ app.post('/api/login', async (req, res) => {
 
     // Generate JWT
     const token = jwt.sign({ userId: user._id, role: user.role }, jwtSecret, { expiresIn: '1h' });
-    res.status(200).json({ token, message: 'Login successful!' });
+
+    // Set cookie options
+    const cookieOptions = {
+      httpOnly: false,
+      secure: false, 
+      maxAge: 3600000, // 1 hour
+    };
+
+    // Set the cookie
+    res.cookie('token', token, cookieOptions);
+
+    // Return a success message
+    res.status(200).json({ message: 'Login successful!', role: user.role,token: token });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
   }
@@ -190,6 +206,11 @@ app.get('/api/instructor-teams', authenticateToken, isInstructor, async (req, re
   }
 });
 
+//Instructor Dashboard route
+
+app.post('/api/instructor-dashboard', authenticateToken, isInstructor, async (req, res) => {
+  res.status(200).json({ message: 'Welcome, instructor!' });
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
