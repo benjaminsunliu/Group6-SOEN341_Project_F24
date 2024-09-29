@@ -1,18 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const loginHandler = () => {
-    alert(`Logged into an account with ${email} ${password}`);
-}
+  const loginFunc = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await axios.post('http://localhost:5050/api/login', {
+        email,
+        password,
+      }, {
+        withCredentials: true // Important: allows cookies to be sent with the request
+      });
+      const role = response.data.role;
+
+      // Redirect based on user role
+      if (role === 'instructor') {
+        navigate('/instructor-dashboard');
+      } else {
+        navigate('/home'); // Redirect to a different page for non-instructor roles
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
+    }
+  };
 
   return (
     <div class="container" style={{ padding: "13% 0%" }}>
       <main class="form-signin m-auto" style={{ width: "25%" }}>
-        <form onSubmit={loginHandler}>
+        <form onSubmit={loginFunc}>
           <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
           <div class="form-floating">

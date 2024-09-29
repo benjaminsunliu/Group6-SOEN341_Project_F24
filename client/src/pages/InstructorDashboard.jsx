@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import "./InstructorDashboard.css";
 import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
@@ -6,7 +10,27 @@ import GroupForm from "../components/GroupForm";
 import StudentTable from "../components/StudentTable";
 import GroupList from "../components/GroupList";
 
+
 const InstructorDashboard = (props) => {
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const token = Cookies.get('token'); // Get the token from cookies
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const { role } = decodedToken; // Get the role from the decoded token
+
+      // Check if the role is not 'instructor'
+      if (role !== 'instructor') {
+        navigate('/home'); // Redirect to home if not an instructor
+      }
+    } else {
+      navigate('/login'); // Redirect to home if no token is found
+    }
+  }, [navigate]);
+
+
   // Placeholders: replace with headers from database
   const tableHeaders = [
     { id: "fname", title: "First Name" },
