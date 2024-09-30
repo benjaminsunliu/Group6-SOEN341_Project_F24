@@ -13,12 +13,13 @@ const Login = (props) => {
     e.preventDefault();
     setError('');
 
-    try {
-      // Basic form validation
     if (!email || !password) {
       alert("Please fill out all fields.");
       return;
   }
+
+    try {
+      // Basic form validation
 
       const response = await axios.post('http://localhost:5050/api/login', {
         email,
@@ -37,8 +38,6 @@ const Login = (props) => {
       }
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed. Please try again.');
-      setEmail('');
-      setPassword('');
     }
   };
 
