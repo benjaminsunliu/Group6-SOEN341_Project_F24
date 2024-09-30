@@ -23,7 +23,7 @@ const InstructorDashboard = (props) => {
 
       // Check if the role is not 'instructor'
       if (role !== 'instructor') {
-        navigate('/home'); // Redirect to home if not an instructor
+        navigate('/home'); // Redirect to login if not an instructor
       }
     } else {
       navigate('/login'); // Redirect to login if no token is found
