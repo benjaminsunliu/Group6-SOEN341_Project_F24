@@ -26,7 +26,7 @@ const InstructorDashboard = (props) => {
         navigate('/home'); // Redirect to home if not an instructor
       }
     } else {
-      navigate('/login'); // Redirect to home if no token is found
+      navigate('/login'); // Redirect to login if no token is found
     }
   }, [navigate]);
 

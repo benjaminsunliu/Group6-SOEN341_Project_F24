@@ -8,17 +8,25 @@ const Login = (props) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+
   const loginFunc = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
+      // Basic form validation
+    if (!email || !password) {
+      alert("Please fill out all fields.");
+      return;
+  }
+
       const response = await axios.post('http://localhost:5050/api/login', {
         email,
         password,
       }, {
         withCredentials: true // Important: allows cookies to be sent with the request
       });
+
       const role = response.data.role;
 
       // Redirect based on user role
@@ -28,14 +36,16 @@ const Login = (props) => {
         navigate('/home'); // Redirect to a different page for non-instructor roles
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      alert(err.response?.data?.message || 'Login failed. Please try again.');
+      setEmail('');
+      setPassword('');
     }
   };
 
   return (
     <div class="container" style={{ padding: "13% 0%" }}>
       <main class="form-signin m-auto" style={{ width: "25%" }}>
-        <form onSubmit={loginFunc}>
+        <form>
           <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
           <div class="form-floating">
@@ -70,7 +80,7 @@ const Login = (props) => {
               Remember me
             </label>
           </div>
-          <button class="btn btn-primary w-100 py-2" type="submit">
+          <button class="btn btn-primary w-100 py-2" type="submit" onClick = {loginFunc}>
             Login
           </button>
           <br/>
