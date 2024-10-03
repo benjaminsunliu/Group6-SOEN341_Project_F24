@@ -33,11 +33,11 @@ const Navbar = (props) => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/instructor-dashboard">
-                  Instructor Dashboard
+                <Link class="nav-link" to="/create-account">
+                  Sign Up
                 </Link>
               </li>
-              <li class="nav-item dropdown">
+              {/*<li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -72,7 +72,7 @@ const Navbar = (props) => {
                 <a class="nav-link disabled" aria-disabled="true">
                   Disabled
                 </a>
-              </li>
+              </li>*/}
             </ul>
             <form class="d-flex" role="search">
               <input

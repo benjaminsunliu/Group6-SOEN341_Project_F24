@@ -67,7 +67,7 @@ const CreateAccount = (props) => {
     };
 
     return (
-    <div class="container" style={{ padding: "13% 0%" }}>
+    <div class="body">
         <main className="body" class="body">
         <form /*</main>onSubmit={loginHandler}*/>
             <h1 class="h3 mb-3 fw-normal">Create an Account</h1>

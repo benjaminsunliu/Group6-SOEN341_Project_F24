@@ -15,7 +15,7 @@ const Footer = (props) => {
       }}
     >
       {/* in line css in jsx need double curly brackets*/}
-      <p>SOEN 341 project group 6</p>
+      <p>SOEN 341 Project - Group 6</p>
     </footer>
   );
 };

@@ -237,7 +237,7 @@ const InstructorDashboard = (props) => {
   return (
     <>
       <h1 class="Dashboard-header">Course Name</h1>
-      <div class="body"> 
+      <div class=""> 
         <TabContainer tabs={tabsData} />
       </div>
     </>

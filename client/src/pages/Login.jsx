@@ -42,7 +42,7 @@ const Login = (props) => {
   };
 
   return (
-    <div class="container" >
+    <div class="body" >
       <main className="body" class="body">
         <form>
           <h1 class="h3 mb-3 fw-normal">Please login</h1>
