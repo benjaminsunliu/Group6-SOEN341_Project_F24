@@ -1,0 +1,56 @@
+Meeting Minutes
+
+Meeting Details
+Date: Thursday September 26th 2024
+Time: 5:40pm - 7:20pm
+Location: Concordia University SGW campus Hall building 11th floor
+Attendees: Everyone
+Absent: None
+
+Agenda
+- Inform each other about our progress to keep us up to date
+- Review our work
+- Discuss about possible fixes and improvements
+
+Discussion Points
+- Item 1: User Stories
+  	Discussion Summary: Feedback from the TA showed us that our user stories seemed lacking in numbers and insufficient in details.
+	  Decisions Made: After brainstorming, we have included a couple of new user stories. Previous user stories were refined with more descriptions, assignments and details
+
+- Item 2: Login Page and Account creation conflicts with UI and Back-End team
+  	Discussion Summary: The back-end team (Jordan and Benjamin) discussed with the UI team (Ella and Anthony)about few design flaws of the login and creation page 
+                        designs, indicating a couple of conflicts with the schema of the database.
+  	Decisions Made: Ella and Anthony will add the missing fields into the login and account creation pages. Jordan and Benjamin will implement the role-based algorithm
+	                  with the new properly formatted data sent to the database from the React app.
+-Item 3: Database connection
+      Discussion:
+        - Benjamin and Jordan asked questions to Mustafa and Mehrad about their implementation of the database to connect it to the Node.js server. 
+        - They clarified the schema and constraints for the different types of users (students and instructors)
+      Decision Made: The database and the server were connected and feature of adding users to the database was made possible with the React app and the server.
+
+-Item 4: Instructor team creation (and additional designs)
+      Discussion:
+        - Ella and Anthony asked feedback for the design of the team creation by the instructors and how it would look on the dashboards
+        - Jordan and Benjamin asked if Ella and Anthony can change the change the account creation so that users can choose a role before creating an account instead 
+          of assigning the user's role based on the email pattern discussed in the previous meeting.
+      Decision Made: The email pattern idea was scrapped and radio buttons were added for the role choosing feature.
+
+Action Items
+- Action Item 1: Logging in and Account creation refining 
+	Assignees: Jordan and Benjamin
+	Due Date: Preferably before Sept 29th
+
+- Action Item 2: Team creation
+	Assignees: Ella and Anthony
+	Due Date: Sept 27th
+
+Next Steps:
+Complete the login feature before October 3rd (Demo deadline)
+Make a meeting if necessary
+Continue additional features if time permits
+
+Adjournment
+Time: Full adjournment at 7:20PM
+
+Attachments
+Sprint 1 Plan and User Stories(updated) : https://docs.google.com/spreadsheets/d/1ozaMjaeOTEgtV9U4M3ek0Z_PJC4Lt4VAN3ONpwH12xY/edit?gid=0#gid=0
