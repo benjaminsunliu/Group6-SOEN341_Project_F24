@@ -23,7 +23,7 @@ const InstructorDashboard = (props) => {
 
       // Check if the role is not 'instructor'
       if (role !== 'instructor') {
-        navigate('/home'); // Redirect to login if not an instructor
+        navigate('/'); // Redirect to login if not an instructor
       }
     } else {
       navigate('/login'); // Redirect to login if no token is found
@@ -183,6 +183,23 @@ const InstructorDashboard = (props) => {
       phone: "438 0001235",
     },
   ];
+  const assessments = [
+    {
+      fname: "Liam",
+      lname: "Nguyen",
+      assessment: "Assignment 1",
+    },
+    {
+      fname: "Ava",
+      lname: "Martinez",
+      assessment: "Assignment 1",
+    },
+    {
+      fname: "Omar",
+      lname: "Khan",
+      assessment: "Assignment 1",
+    }
+  ];
 
   const tabsData = [
     {
@@ -211,14 +228,16 @@ const InstructorDashboard = (props) => {
     {
       id: "assessments",
       label: "Assessments",
-      content: <div class="Dashboard-contents">Peer assessments go here</div>,
+      content: (
+        <div class="Dashboard-contents">Peer assessments go here
+        </div>)
     },
   ];
 
   return (
     <>
       <h1 class="Dashboard-header">Course Name</h1>
-      <div>
+      <div class="body"> 
         <TabContainer tabs={tabsData} />
       </div>
     </>

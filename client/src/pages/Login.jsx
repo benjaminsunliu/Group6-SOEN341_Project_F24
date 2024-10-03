@@ -42,8 +42,8 @@ const Login = (props) => {
   };
 
   return (
-    <div class="container" style={{ padding: "13% 0%" }}>
-      <main class="form-signin m-auto" style={{ width: "25%" }}>
+    <div class="container" >
+      <main className="body" class="body">
         <form>
           <h1 class="h3 mb-3 fw-normal">Please login</h1>
 

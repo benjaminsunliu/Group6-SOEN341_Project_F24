@@ -1,11 +1,14 @@
+import "./styles.css";
 const Home = (props) => {
   return (
     <>
-      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <main class="px-3" style={{ padding: "20% 0" }}>
-          {" "}
-          {/* 20% for top and bottom, 0 for right and left */}
-          <p class="lead"></p>
+      <div class="body" className="body">
+        <main className="body" class="body">
+          <h1 className="home">Welcome to RateMyPeers! </h1>
+          <img src="./images/home.png" alt="home" width="300"/>
+          <p class="home" className="home">
+          This is a platform where students can rate their peers based on their performance in group projects. This platform is designed to help students find the best group members for their projects.
+          </p>
         </main>
       </div>
     </>
