@@ -1,0 +1,19 @@
+Meeting Minutes
+
+Meeting Details
+Date: Sept 25 2024
+Time: 12pm-2pm
+Location: JMSB
+Attendees: Benjamin Liu, Jordan Yeh
+Absent: Backend meeting so nobody was absent
+
+Agenda
+
+We discussed the structure of the backend and what packages we would need to use
+to allow the login functionality's security, session maintenance, database connection, etc.
+We pair programmed the structure of the backend including the base code for the essential functions.
+Discussed how we would integrate with UI and DB.
+
+
+Next Steps
+Upcoming Meetings: Another Backend Meeting to Check Progress
