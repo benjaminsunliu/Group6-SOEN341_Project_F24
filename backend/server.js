@@ -112,6 +112,18 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// User logout route
+app.post('/api/logout', (req, res) => {
+  // Clear the cookie that contains the JWT token
+  res.clearCookie('token', {
+    httpOnly: false,
+    secure: false,
+  });
+  
+  res.status(200).json({ message: 'Logout successful!' });
+});
+
+
 // User registration route
 app.post('/api/create-account', async (req, res) => {
   const {fName, lName, email, password, role} = req.body;
