@@ -1,6 +1,25 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = (props) => {
+  const logoutHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5050/api/logout", {}, { withCredentials: true });
+      console.log("Server Response:", response);
+      if (response.status === 200) {
+        alert("Logged out successfully!");
+        // Redirect to login page or refresh the page
+        window.location.href = "/login"; // Adjust the URL to your login page
+      } else {
+        alert(`Unexpected response status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+      alert("Error logging out. Please try again.");
+    }
+  };
+  
   return (
     <>
       <nav class="navbar bg-primary navbar-expand-lg ">
@@ -35,6 +54,11 @@ const Navbar = (props) => {
               <li class="nav-item">
                 <Link class="nav-link" to="/create-account">
                   Sign Up
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" onClick={logoutHandler}>
+                  Log Out
                 </Link>
               </li>
               {/*<li class="nav-item dropdown">

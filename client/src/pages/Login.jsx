@@ -32,9 +32,11 @@ const Login = (props) => {
 
       // Redirect based on user role
       if (role === 'instructor') {
+        alert("Successfully logged in as an instructor!");
         navigate('/instructor-dashboard');
       } else {
-        navigate('/home'); // Redirect to a different page for non-instructor roles
+        alert("Successfully logged in as a student!");
+        navigate('/'); // Redirect to a different page for non-instructor roles
       }
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed. Please try again.');
