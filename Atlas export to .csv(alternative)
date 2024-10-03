@@ -1,0 +1,4 @@
+#Run the code in terminal 
+
+
+mongoexport --uri="mongodb+srv://login:moon@logincluster.thvtn.mongodb.net/?retryWrites=true&w=majority&appName=LoginCluster" --collection=users --db=test --type=csv --fields=_id,fName,lName,email,password,role,__v --out=users_data.csv
