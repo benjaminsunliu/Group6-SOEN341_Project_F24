@@ -6,20 +6,20 @@ import { useState } from "react";
 const GroupForm = ({ students }) => {
 
     const [groupMembers, setGroupMembers] = useState([]);
+    const [groupName, setGroupName] = useState('');
     const [groups, setGroups] = useState([]);
+    const [groupedStudents, setStudentsAsGrouped] = useState([]);
 
-    const selectionHandler = (e) => {
-        // TODO: Add cooldown to this, I noticed that the else is sometimes executing twice
+    const selectionHandler = (e) => { 
+
         const studentID = e.target.value;
         setGroupMembers((currentGroup) => {
             // If student is already in that group, then remove them
             if(currentGroup.includes(studentID)) {
-                alert(`Removed student ${e.target.value} from groups`);
                 return currentGroup.filter(id => id !== studentID);
             }
             else {
                 // Add student to end of array
-                alert(`Added student ${e.target.value} to groups`);
                 return [...currentGroup, studentID];
             }
         })
@@ -31,11 +31,16 @@ const GroupForm = ({ students }) => {
 
         if(groupMembers.length > 0) {
             setGroups((currentGroups) => {
-                alert(`Creating group ${Date.now()}`);
+                alert(`Creating group "${groupName}"\nGroup members: ${groupMembers.join(', ')}`);
                 return [...currentGroups, {groupID: Date.now(), members: groupMembers}]
             })
+
+            // Used to disable the checkboxes of grouped students
+            setStudentsAsGrouped((studentsInGroups) => [...groupedStudents, ...groupMembers]) 
+
             // Clear temporary group members array
             setGroupMembers([]);
+            setGroupName('');
         }
     }
 
@@ -43,9 +48,23 @@ const GroupForm = ({ students }) => {
         <div className="GroupForm-form">
         <h3>Form Groups</h3>
         <section className="GroupForm-checklist">
-        <StudentChecklist students={students} selectionHandler={selectionHandler}/>
+        <StudentChecklist students={students} selectionHandler={selectionHandler} selectedStudents={groupedStudents}/>
         </section>
-        <Button buttonText="Create Group" buttonColor="btn btn-secondary" onClick={formGroup}/>
+
+        <div className="form-group">
+        <label>Enter Group Name:</label>
+        <input
+            type="text"
+            id="groupName"
+            className="form-control"
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)} // Update groupName state
+            placeholder="Group Name"
+        />
+        </div>
+        <br/>
+
+        <Button buttonText="Create Group" buttonColor="btn btn-secondary" onClick={formGroup} disabled={groupMembers.length === 0 || groupName === ''}/>
         </div>
     );
 }
