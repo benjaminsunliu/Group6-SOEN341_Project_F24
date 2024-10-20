@@ -30,7 +30,6 @@ const InstructorDashboard = (props) => {
     }
   }, [navigate]);
 
-
   // Placeholders: replace with headers from database
   const tableHeaders = [
     { id: "fname", title: "First Name" },

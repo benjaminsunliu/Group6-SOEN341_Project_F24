@@ -1,7 +1,11 @@
 import StudentChecklist from "./StudentChecklist";
 import Button from "./Button";
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import "./GroupForm.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const GroupForm = ({ students }) => {
 
@@ -25,24 +29,66 @@ const GroupForm = ({ students }) => {
         })
     }
 
-    const formGroup = () => {
+    const navigate = useNavigate();
+    
 
-        // TODO: Server-side logic for group creation
-
-        if(groupMembers.length > 0) {
-            setGroups((currentGroups) => {
-                alert(`Creating group "${groupName}"\nGroup members: ${groupMembers.join(', ')}`);
-                return [...currentGroups, {groupID: Date.now(), members: groupMembers}]
-            })
-
-            // Used to disable the checkboxes of grouped students
-            setStudentsAsGrouped((studentsInGroups) => [...groupedStudents, ...groupMembers]) 
-
-            // Clear temporary group members array
-            setGroupMembers([]);
-            setGroupName('');
+    const formGroup = async (e) => {
+        e.preventDefault(); // Prevent page reload
+    
+        try {
+            const token = Cookies.get('token'); // Retrieve token from cookies
+            if (!token) {
+                alert("No token found. Please log in.");
+                return;
+            }
+    
+            const decodedToken = jwtDecode(token); // Decode the JWT token
+            const { userId } = decodedToken; // Extract email from the token
+    
+            if (!groupName || groupMembers.length === 0) {
+                alert("Group name and at least one member are required.");
+                return;
+            }
+    
+            alert(`Creating group "${groupName}"\nGroup members: ${groupMembers.join(', ')}`);
+    
+            // Send group data to the server
+            const response = await axios.post('http://localhost:5050/api/create-team', {
+                groupName,
+                groupMembers,
+                userId,
+            }, {
+                withCredentials: true,
+            });
+    
+            if (response.status === 201) {
+                alert("Group created successfully!");
+    
+                // Add the new group to the existing state
+                setGroups((currentGroups) => [
+                    ...currentGroups,
+                    { groupID: Date.now(), members: groupMembers },
+                ]);
+    
+                // Disable the checkboxes of grouped students
+                setStudentsAsGrouped((studentsInGroups) => [
+                    ...studentsInGroups,
+                    ...groupMembers,
+                ]);
+    
+                // Clear the group members and name inputs
+                setGroupMembers([]);
+                setGroupName('');
+            } else {
+                throw new Error(response.data.message || "Failed to create group.");
+            }
+        } catch (err) {
+            alert(`Error: ${err.message || err}`);
+            console.error(err); // Log error for debugging
         }
-    }
+    };
+    
+    
 
     return(
         <div className="GroupForm-form">
