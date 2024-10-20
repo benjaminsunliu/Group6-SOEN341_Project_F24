@@ -50,14 +50,15 @@ userSchema.pre('save', async function (next) {
 const database = mongoose.connection;
 
 const usersCollection = database.collection('users');
+const teamsCollection = database.collection('teams');
 
 const User = mongoose.model('User', userSchema);
 
 // Team schema
 const teamSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  instructor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+  name: { type: String, required: true }, // Team name
+  userId: { type: String, required: true }, // Instructor's email
+  members: [{ type: String, required: true }], // List of team members' emails
 });
 
 const Team = mongoose.model('Team', teamSchema);
@@ -150,17 +151,19 @@ app.post('/api/create-account', async (req, res) => {
 
 // Instructor route to create teams
 app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) => {
-  const { name, studentIds } = req.body;
-  const instructorId = req.user.userId;
+  const { groupName, groupMembers, userId} = req.body;
 
   try {
-    const team = new Team({ name, instructor: instructorId, students: studentIds });
+    const team = new Team({name: groupName, userId: userId, members: groupMembers});
     await team.save();
+    console.log(`Team created successfully: ${groupName}`);
     res.status(201).json({ message: 'Team created successfully!' });
   } catch (error) {
+    console.error('Error creating team:', error);
     res.status(400).json({ message: 'Error creating team', error });
   }
 });
+
 
 // Route for instructors to import students from CSV and create a team
 app.post('/api/import-roster', authenticateToken, isInstructor, (req, res) => {
