@@ -1,7 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = (props) => {
+
+  const navigate = useNavigate();
+  
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    const token = Cookies.get('token'); // Get the token from cookies
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setUserRole(decodedToken.role); // Set user role from the decoded token
+    } else {
+      // Not sure if we need anything here
+    }
+  }, [navigate]);
+  
   const logoutHandler = async (event) => {
     event.preventDefault();
     try {
@@ -19,6 +37,81 @@ const Navbar = (props) => {
       alert("Error logging out. Please try again.");
     }
   };
+  
+  // TODO: get first name info and print to navbar
+  const renderCustomNavbar = () => {
+    switch(userRole) {
+      case 'student': 
+        return(
+          <>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <Link class="nav-link active" aria-current="page" to="/">
+              Home
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" to="/student-dashboard">
+              Student Dashboard
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" onClick={logoutHandler}>
+              Log Out
+            </Link>
+          </li>
+          </ul>
+          Logged in as: (name)
+          </>
+        );
+      case 'instructor':
+        return(
+          <>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <Link class="nav-link active" aria-current="page" to="/">
+              Home
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" to="/instructor-dashboard">
+              Instructor Dashboard
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" onClick={logoutHandler}>
+              Log Out
+            </Link>
+          </li>
+          </ul>
+          Logged in as: (name)
+          </>
+        );
+        default:
+          return(
+            <>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <Link class="nav-link active" aria-current="page" to="/">
+              Home
+            </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/login">
+                Login
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/create-account">
+                Create Account
+              </Link>
+            </li>
+            </ul>
+            Logged out
+            </>
+          );
+    }
+  }
   
   return (
     <>
@@ -40,27 +133,8 @@ const Navbar = (props) => {
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <Link class="nav-link active" aria-current="page" to="/">
-                  Home
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/create-account">
-                  Sign Up
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" onClick={logoutHandler}>
-                  Log Out
-                </Link>
-              </li>
+            
+            {renderCustomNavbar()}
               {/*<li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -97,8 +171,7 @@ const Navbar = (props) => {
                   Disabled
                 </a>
               </li>*/}
-            </ul>
-            <form class="d-flex" role="search">
+            {/*<form class="d-flex" role="search">
               <input
                 class="form-control me-2"
                 type="search"
@@ -108,7 +181,7 @@ const Navbar = (props) => {
               <button class="btn btn-warning" type="submit">
                 Search
               </button>
-            </form>
+            </form>*/}
           </div>
         </div>
       </nav>
