@@ -36,7 +36,7 @@ const Login = (props) => {
         navigate('/instructor-dashboard');
       } else {
         alert("Successfully logged in as a student!");
-        navigate('/'); // Redirect to a different page for non-instructor roles
+        navigate('/student-dashboard'); // Redirect to a different page for non-instructor roles
       }
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed. Please try again.');

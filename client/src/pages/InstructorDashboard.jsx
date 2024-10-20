@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import "./InstructorDashboard.css";
+import "./Dashboard.css";
 import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
 import SingleFileUploader from "../components/SingleFileUploader";
