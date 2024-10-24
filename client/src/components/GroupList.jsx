@@ -2,7 +2,7 @@ import InstructorDashboard from "../pages/InstructorDashboard";
 import Button from "./Button";
 import CollapsableButton from "./CollapsableButton";
 const GroupList = ({ text, students }) => {
-  let groupSize = 4;
+  let groupSize = 11;
   let numOfGroups = students.length / groupSize;
   let arrayOfGroups = [];
 
@@ -29,7 +29,7 @@ const GroupList = ({ text, students }) => {
               <div style={{ margin: "1px" }}>
                 <CollapsableButton
                   // once we can fetch group names from database change the buttonText to the actual group name
-                  buttonText={"Group" + item}
+                  buttonText={"Groups"}
                   buttonColor="btn btn-primary"
                 />
               </div>
