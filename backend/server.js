@@ -164,6 +164,15 @@ app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) =
   }
 });
 
+app.get('/api/get-teams', authenticateToken, async (req, res) => {
+  try {
+    const teams = await Team.find({ userId: req.user.userId });
+    res.status(200).json({ teams });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching teams', error });
+  }
+});
+
 
 // Route for instructors to import students from CSV and create a team
 app.post('/api/import-roster', authenticateToken, isInstructor, (req, res) => {
