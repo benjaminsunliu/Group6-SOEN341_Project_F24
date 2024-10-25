@@ -230,6 +230,41 @@ app.get('/api/instructor-teams', authenticateToken, isInstructor, async (req, re
   }
 });
 
+
+//Export groups as CSV file
+//need 'csv-writer'
+const { createObjectCsvWriter } = require('csv-writer');
+//api/export-groups
+app.get('/api/export-groups', authenticateToken, isInstructor, async (req, res) => {
+  try {
+
+    const teams = await Team.find({ userId: req.user.userId });
+    //used the csv-writer
+    const csvWriter = createObjectCsvWriter({
+      path: 'groups.csv',
+      //
+      header: [
+        { id: 'name', title: 'Group Name' },
+        { id: 'members', title: 'Members' },
+      ],
+    });
+
+    const records = teams.map(team => ({
+      name: team.name,
+      // Convert array to comma separated IDs
+      members: team.members.join(', '), 
+    }));
+
+    await csvWriter.writeRecords(records);
+    res.download('groups.csv');
+  } catch (error) {
+    console.error('Error exporting groups:', error);
+    res.status(500).json({ message: 'Error exporting groups', error });
+  }
+});
+
+
+
 //Instructor Dashboard route
 
 app.post('/api/instructor-dashboard', authenticateToken, isInstructor, async (req, res) => {
