@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import "./Dashboard.css";
@@ -9,6 +9,7 @@ import SingleFileUploader from "../components/SingleFileUploader";
 import GroupForm from "../components/GroupForm";
 import StudentTable from "../components/StudentTable";
 import GroupList from "../components/GroupList";
+import axios from 'axios';
 
 
 const InstructorDashboard = (props) => {
@@ -29,6 +30,16 @@ const InstructorDashboard = (props) => {
       navigate('/login'); // Redirect to login if no token is found
     }
   }, [navigate]);
+
+  const exportcsv = async (e) => {
+    e.preventDefault();
+    try {
+      window.location.href = 'http://localhost:5050/api/export-groups';
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
   // Placeholders: replace with headers from database
   const tableHeaders = [
@@ -221,6 +232,7 @@ const InstructorDashboard = (props) => {
           <GroupForm students={students} />
           {/* If I want to access students array from inside GroupList I need to pass it to that component */}
           <GroupList text="Groups go here" students={students} />
+          <Button buttonText="Export Groups as CSV" buttonColor="btn btn-secondary" onClick={exportcsv}/>
         </div>
       ),
     },
