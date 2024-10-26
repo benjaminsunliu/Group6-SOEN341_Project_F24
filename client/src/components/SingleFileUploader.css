@@ -1,0 +1,10 @@
+.upload-form {
+    background-color: #f4c109;
+    padding: 2rem;
+    margin: 0 auto 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
