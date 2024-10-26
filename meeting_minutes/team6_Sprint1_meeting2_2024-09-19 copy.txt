@@ -1,0 +1,89 @@
+Meeting Minutes
+
+Meeting Details
+Date: 19th of September 2024
+Time: 16:30 - 18:30
+Location: Hall Building, Concordia University
+Attendees: Benjamin, Jordan, Anthony, Ella, Mustafa, Mehrad
+Absent: None
+
+Agenda
+-Assign 3 components of the project to 3 teams
+-Discuss further aspects of the project
+-Clarify Sprint 1 details
+-Follow up on User Stories
+
+
+Discussion Points:
+-Item 1: Assign different tasks of the project 
+      Discussion:
+          -As mentioned in the previous meeting, the project has been divided into 3 components: 1) UI design, 2) Server-side design, and 3) Database design.
+      Discussion Made: 
+          -Ella and Anthony will design the UI (front end) of the project
+          -Jordan and Benjamin will both design the back-end and server architecture of the web
+          -Mehrad and Mustafa will design the database of the project. All assignments will follow the requirements of Sprint 1.
+
+
+
+-Item 2: Technology used by each group to build the final product
+      Discussion: 
+      Decision Made:
+        -The team responsible for UI design will use React.js. 
+        -The team responsible for the server-side component will use Node.js. 
+        -The team responsible for designing the database will use MongoDB.
+
+
+-Item 3: Clarification 
+      Discussion:
+        -After discussing with Professor Dargham, it was clarified that authentication is not necessary and can be based on assumption for the login process.
+        -Different formats can be used for login IDs to prevent students from logging in as instructors.
+        -As discussed before, for example: the student could login with :n_netname@live.concordia.ca format email and instructor could login with firstname.lastname@staff.concordia.ca format.
+      Decision Made: use different login format for instructor and student/ discuss in the upcoming meeting
+
+
+-Item 4: User Stories
+      Discussion: 
+          -The group gathered new ideas and added additional information to the User Stories for Sprint 1.
+          -Story points, task priorities, and associated risks were discussed.
+
+
+-Item 5: Issues related to the database and back-end component
+      Discussion: 
+          Database design : 
+           -Two different groups (one for instructors, the other for students) will have different permission levels and visibility access.
+           -Instructors will have permission to access all information, while students will have more restricted access (based on Sprint 1 description).
+
+          Server-side design:
+           -The server needs to be connected to the database and front-end. The server will access the front-end through its root directory.
+           -The server will be connected to the front-end of the webpage, by accessing its root directory.
+           -In the next meeting, the three components of the web project will be integrated.
+
+      Decision Made: 
+            -Furthur discussion in upcoming meeting
+
+
+          
+
+Action Items:
+
+-Action Item: Each group will work on its assigned component, acquire necessary knowledge through online resources, and build the base for the code to present.
+
+
+Next Steps:
+
+Upcoming Meetings: 
+-Next Thursday (September 26th) during/after the lab period at Concordia.
+
+Important Dates: 
+- Follow up with the lab coordinator on Thursday, September 26th.
+- Submission Date: October 3rd.
+- Demo Date: October 3rd (during the lab period).
+
+
+Note: The team will meet at least once more before the submission of Sprint 1.
+
+Adjournment: 
+Time: 18:30
+
+Attachments: 
+Sprint 1 Plan and User Stories(updated) : https://docs.google.com/spreadsheets/d/1ozaMjaeOTEgtV9U4M3ek0Z_PJC4Lt4VAN3ONpwH12xY/edit?gid=0#gid=0

@@ -1,0 +1,18 @@
+Meeting Minutes
+
+Meeting Details
+Date: Sept 23 2024
+Time: 2pm-4pm
+Location: Campus
+Attendees: Mehrad Mostaan, Mustafa Alawadi
+Absent: DB meeting so nobody was absent
+
+Agenda
+
+We started by exploring both a localhost and a cloud-based database but decided to stick with localhost after the TA confirmed that a cloud option wasn't necessary. 
+We've successfully tested storing user data submitted through an HTML form and are now looking into how to add other necessary data and establish a connection to the back end.
+
+
+
+Next Steps
+Upcoming Meetings: Another DB meeting spet 25 2024 to add other necessary data 
