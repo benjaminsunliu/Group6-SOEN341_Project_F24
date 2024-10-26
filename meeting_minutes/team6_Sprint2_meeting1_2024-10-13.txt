@@ -1,0 +1,53 @@
+Meeting Minutes
+
+Meeting Details
+Date: 13th of October 2024
+Time: 18:00-19:15
+Location: Discord Server Voice Channel
+Attendees: Benjamin, Jordan, Anthony, Ella, Mustafa, Mehrad
+Absent: None
+
+Agenda
+- Create user stories from Sprint 2's requirements.
+- Reintroduce user stories from Sprint 1 into the Sprint 2 from the backlog.
+
+
+Discussion Points
+- Item 1: User Stories
+	Discussion Summary: We noticed that we hadn't completed some user stories from Sprint 1, thus we reintroduced them into Sprint 2 from the backlog. We also brainstormed for new stories. 
+	Decisions Made: We added more stories that meet Sprint 2's requirements and included issue number for each story. 
+	
+- Item 2: Instructor Dashboard
+	Discussion Summary: We discussed the instructor dashboard, focusing on what teachers can view and edit in comparison to the student page.
+  We concluded that the dashboard was crucial for enabling team selection, roster management, and effective group formation thus have a high priority. 
+	Decisions Made: We decided to implement a routing logic to redirect students to the student dashboard and teachers to the instrcutor dashboard,
+  verify their role from login credentials and accounts stored in the database, and then design the UI. 
+	
+- Item 3: Confirmation Page
+	Discussion Summary: We initially considered allowing students to edit their ratings and feedback after completing a peer assessment.
+  However, we realized this approach could lead to complications, such as needing to set deadlines to prevent repeated changes.
+	Decisions Made: We thought it was best to prompt students for confirmation when they finish evaluating their peers. This will be implemented by displaying a confirmation dialog when the submission button is clicked.
+  If the student confirms, their ratings will be submitted; if not, the submission will be canceled.
+
+
+Action Items
+- Action Item 1: Implement routing logic to redirect students to the students dashboard and teachers to their instructor dashboard. Design the UI and verify user role from login credentials stored in the database.
+	Assignee: Mustafa, Mehrad, Benjamin, Jordan, Anthony, Ella.
+	Due Date: Oct 20th.
+
+- Action Item 2: Instructors can create teams
+	Assignee: Ella and Anthony
+	Due Date: Preferably Oct 20th
+
+
+
+Next Steps
+Upcoming Meetings: [Sunday Oct 20 evening]
+Implementation of a rating system that allows students to rate their peers.
+If time permits, implement the forget password feature. 
+
+Adjournment
+Time: Full adjournment at 7:20PM
+
+Attachments
+Sprint 2 Plan and User Stories (updated) : https://docs.google.com/spreadsheets/d/1ozaMjaeOTEgtV9U4M3ek0Z_PJC4Lt4VAN3ONpwH12xY/edit?gid=0#gid=0
