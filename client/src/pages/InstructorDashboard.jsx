@@ -16,6 +16,11 @@ const InstructorDashboard = (props) => {
 
   const navigate = useNavigate();
   
+  // TODO: Implement backend roster import functionality
+  const importCourseRoster = (file) => {
+    alert(`File to upload: ${file.name}`);
+  };
+
   useEffect(() => {
     const token = Cookies.get('token'); // Get the token from cookies
     if (token) {
@@ -220,7 +225,7 @@ const InstructorDashboard = (props) => {
           <StudentTable
             tableContents={{ headers: tableHeaders, contents: students }}
           />
-          {/*<SingleFileUploader fileDescription="Course Roster" fileExtension=".csv"/>*/}
+          <SingleFileUploader fileExtension="csv" fileDescription="course roster" fileSubmitHandler={importCourseRoster}/>
         </div>
       ),
     },

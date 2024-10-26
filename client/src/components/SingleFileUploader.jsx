@@ -25,10 +25,17 @@ const SingleFileUploader = (props) => {
         }
     };
 
-    // TODO: set up this handler on the server side and add it as the upload's button's onClick handler
+    // Wrapper function
     const handleFileSubmit = () => {
-
+        if (file) {
+            props.fileSubmitHandler(file);
+        }
     };
+
+    // TODO: set up this handler on the server side and add it as the upload's button's onClick handler
+    // const handleFileSubmit = () => {
+
+    // };
 
     return (
         <div className="upload-form">
@@ -49,7 +56,7 @@ const SingleFileUploader = (props) => {
             )}
 
             {file && (
-                <Button buttonText="Upload" buttonColor="btn btn-secondary" />
+                <Button buttonText="Upload" buttonColor="btn btn-secondary" onClick={handleFileSubmit}/>
             )}
         </div>
     );
