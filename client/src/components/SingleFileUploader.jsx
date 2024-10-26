@@ -25,17 +25,12 @@ const SingleFileUploader = (props) => {
         }
     };
 
-    // Wrapper function
+    // Wrapper function for form submission handler
     const handleFileSubmit = () => {
         if (file) {
             props.fileSubmitHandler(file);
         }
     };
-
-    // TODO: set up this handler on the server side and add it as the upload's button's onClick handler
-    // const handleFileSubmit = () => {
-
-    // };
 
     return (
         <div className="upload-form">
