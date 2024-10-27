@@ -94,7 +94,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ userId: user._id, role: user.role }, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, role: user.role, fName: user.fName, lName: user.lName}, jwtSecret, { expiresIn: '1h' });
 
     // Set cookie options
     const cookieOptions = {
