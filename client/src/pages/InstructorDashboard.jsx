@@ -197,6 +197,13 @@ const InstructorDashboard = (props) => {
       studentID: "02479135",
       phone: "438 0001235",
     },
+    {
+      fname: "Bobby",
+      lname: "Student",
+      email: "Bobby@mail.com",
+      studentID: "32327656",
+      phone: "438 111 2845",
+    },
   ];
   const assessments = [
     {

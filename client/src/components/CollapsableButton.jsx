@@ -26,7 +26,7 @@ const CollapsableButton = (props) => {
             withCredentials: true, // Send cookies with the request
           });
           // Set the state with the filtered teams
-          setTeams(response.data.teams);
+          setTeams(response.data.studentTeams || []);
         } catch (error) {
           console.error("Error fetching teams:", error);
         } finally {
