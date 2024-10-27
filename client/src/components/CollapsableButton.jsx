@@ -47,9 +47,12 @@ const CollapsableButton = (props) => {
 
   return (
     <>
-      <button onClick={handleClick} className={props.buttonColor}>
-        {props.buttonText}
-      </button>
+      <div class="d-grid gap-2">
+        <button onClick={handleClick} className={props.buttonColor}>
+          {props.buttonText}
+        </button>
+      </div>
+
       {clicked && (
         <div>
           {loading ? (
