@@ -9,7 +9,7 @@ const CollapsableButton = (props) => {
 
   // UseEffect to get the logged-in instructor's userId from the cookie and fetch teams
   useEffect(() => {
-    const token = Cookies.get('token'); // Get the token from cookies
+    const token = Cookies.get("token"); // Get the token from cookies
     if (!token) {
       console.error("No token found");
       return;
@@ -19,12 +19,15 @@ const CollapsableButton = (props) => {
       if (clicked) {
         setLoading(true);
         try {
-          const response = await axios.get("http://localhost:5050/api/get-teams", {
-            headers: {
-              'Authorization': `Bearer ${token}` // Set the Authorization header with the token
-            },
-            withCredentials: true, // Send cookies with the request
-          });
+          const response = await axios.get(
+            "http://localhost:5050/api/get-teams",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`, // Set the Authorization header with the token
+              },
+              withCredentials: true, // Send cookies with the request
+            }
+          );
           // Set the state with the filtered teams
           setTeams(response.data.teams);
         } catch (error) {
@@ -34,7 +37,7 @@ const CollapsableButton = (props) => {
         }
       }
     };
-    
+
     fetchTeams();
   }, [clicked]); // Runs when 'clicked' changes
 
@@ -58,14 +61,12 @@ const CollapsableButton = (props) => {
             >
               <thead>
                 <tr>
-                  <th>Team Name</th>
                   <th>Members</th>
                 </tr>
               </thead>
               <tbody>
                 {teams.map((team) => (
                   <tr key={team._id}>
-                    <td>{team.name}</td>
                     <td>{team.members.join(", ")}</td>
                   </tr>
                 ))}
