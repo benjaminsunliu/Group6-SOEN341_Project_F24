@@ -9,12 +9,14 @@ const Navbar = (props) => {
   const navigate = useNavigate();
   
   const [userRole, setUserRole] = useState(null);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const token = Cookies.get('token'); // Get the token from cookies
     if (token) {
       const decodedToken = jwtDecode(token);
       setUserRole(decodedToken.role); // Set user role from the decoded token
+      setUserName(`${decodedToken.fName} ${decodedToken.lName}`);
     } else {
       // Not sure if we need anything here
     }
@@ -61,7 +63,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           </ul>
-          Logged in as: (name)
+          Logged in as: {userName}
           </>
         );
       case 'instructor':
@@ -84,7 +86,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           </ul>
-          Logged in as: (name)
+          Logged in as: {userName}
           </>
         );
         default:

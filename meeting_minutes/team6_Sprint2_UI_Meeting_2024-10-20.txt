@@ -1,0 +1,59 @@
+Meeting Minutes
+
+Meeting Details
+Date: 20th of October 2024
+Time: 11:00am-12:00pm
+Location: Discord voice channel
+Attendees: Anthony Phelps, Ella Noyes (UI team)
+Absent: None
+
+Agenda
+Remote Repository Organisation, Student Dashboard User Interface Design, Sprint 2 UI Tasks Distribution
+
+Discussion Points
+- Item 1: GitHub Repository Organisation
+	Discussion Summary: The current GitHub repository has four branches: login_UI, login_feature, login_database, and master. 
+	master is far behind all branches, and it's increasingly difficult to find code on the repositority.
+	Decisions Made: All teams' branches must be merged in the master branch as soon as possible to establish a linear commit history.
+	Action Items: Anthony volunteered to clean up the repository and establish a protocol for future contributions to the repository.
+
+- Item 2: Student Dashboard UI Design
+	Discussion Summary: For consistency, the student dashboard should resemble the instructor dashboard. We planned out the visuals on the
+	Miro design board (see minutes' attachments).
+	Decisions Made: We will begin by implementing a dashboard with two main tabs: "assessments" and "personal report". 
+	Once all team members have assessed a student, that individual will access a summarised report of their peers' assessments in the personal report
+	tab. A student may choose peers to evaluate in the assessments tab. On selecting a teammate that has not yet been reviewed, a pop-up assessment form 
+	will render.
+	Action Items: Ella will create the student dashboard page, update the application's routing, and set up the page's tabs. Anthony will implement
+	the UI components and assessment form in the "Assessments" tab.
+
+- Sprint 3 UI Tasks Distribution
+	Discussion Summary: Due to upcoming midterms, Ella and Anthony have inconsistent availabilities during the upcoming two weeks. Ella's project workload will
+	be distributed in the early upcoming week (of the 21st of October), and Anthony will be making contributions during the end of the week and over the weekend 		of the 25th of October.
+	Decisions Made: Ella will take on the earlier UI tasks in the sprint plans (by deadlines), covering some of the later tasks' dependencies. 
+	Anthony will take on the sprint tasks with later due dates.
+
+Action Items
+- Action Item 1: Student Dashboard Page Setup and Routing
+	Assignee: Ella
+	Due Date: 20/10/2024
+
+- Action Item 2: GitHub Repository Reorganisation
+	Assignee: Anthony
+	Due Date: 27/10/2024
+
+- Action Item 3: Sprint 2 UI Tasks/Issues
+	Assignees: Ella and Anthony
+	Due Date: 27/10/2024
+
+
+Next Steps
+Upcoming Meetings: TBD
+Other Important Dates: Sprint 2 Deadline: Sunday October 27th 2024.
+
+
+Adjournment
+Time: 12:25pm
+
+Attachments
+Student dashboard design description in the GitHub wiki: https://github.com/benjaminsunliu/Group6-SOEN341_Project_F24/wiki/Interface
