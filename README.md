@@ -29,7 +29,7 @@ University team projects often struggle with unequal contributions and lack acco
 - [Jordan Yeh](https://github.com/YehJordan), BEng. Software Engineering (COOP) (2023-2027)
 
 ### Database Development
-- [Mustafa Al Awadi](https://github.com/MustafaHunter), BEng. Software Engineering
+- [Mustafa Al Awadi](https://github.com/MustafaHunter), BCompSc. Bachelor of Computer Science (2022-2025)
 - [Mehrad Mostaan](https://github.com/Mehrad25Software), BEng. Software Engineering (C.Edge) (2022-2026)
   
 ### Frontend Development
