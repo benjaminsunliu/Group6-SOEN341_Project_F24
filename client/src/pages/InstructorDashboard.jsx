@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import "./Dashboard.css";
@@ -9,7 +9,7 @@ import SingleFileUploader from "../components/SingleFileUploader";
 import GroupForm from "../components/GroupForm";
 import StudentTable from "../components/StudentTable";
 import GroupList from "../components/GroupList";
-import axios from "axios";
+
 
 const InstructorDashboard = (props) => {
   const navigate = useNavigate();

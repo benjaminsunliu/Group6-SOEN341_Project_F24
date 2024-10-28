@@ -39,6 +39,13 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['student', 'instructor'], required: true }
 });
 
+// Team schema
+const teamSchema = new mongoose.Schema({
+  name: { type: String, required: true }, // Team name
+  userId: { type: String, required: true }, // Instructor's email
+  members: [{ type: String, required: true }], // List of team members' emails
+});
+
 // Password hashing middleware
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
@@ -54,12 +61,6 @@ const teamsCollection = database.collection('teams');
 
 const User = mongoose.model('User', userSchema);
 
-// Team schema
-const teamSchema = new mongoose.Schema({
-  name: { type: String, required: true }, // Team name
-  userId: { type: String, required: true }, // Instructor's email
-  members: [{ type: String, required: true }], // List of team members' emails
-});
 
 const Team = mongoose.model('Team', teamSchema);
 

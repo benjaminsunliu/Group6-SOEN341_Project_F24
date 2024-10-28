@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import "./Dashboard.css";
 import TabContainer from "../components/TabContainer";
+import Button from "../components/Button";
+import GroupList from "../components/GroupList";
 
 
 const StudentDashboard = (props) => {
@@ -33,6 +35,8 @@ const StudentDashboard = (props) => {
       content: (
         <div class="Dashboard-contents">
             <p>Group list and "assess" buttons will be here</p>
+            <GroupList/>
+
         </div>
         ),
     },
