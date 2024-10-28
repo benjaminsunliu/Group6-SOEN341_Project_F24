@@ -94,7 +94,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ userId: user._id, role: user.role }, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, role: user.role, fName: user.fName, lName: user.lName, email: user.email}, jwtSecret, { expiresIn: '1h' });
 
     // Set cookie options
     const cookieOptions = {
@@ -166,7 +166,18 @@ app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) =
 
 app.get('/api/get-teams', authenticateToken, async (req, res) => {
   try {
-    const teams = await Team.find({ userId: req.user.userId });
+    let teams;
+
+    if (req.user.role === 'instructor') {
+      // Fetch teams where the instructor is the user
+      teams = await Team.find({ userId: req.user.userId });
+    } else if (req.user.role === 'student') {
+      // Fetch teams where the student's email is in the members array
+      teams = await Team.find({ members: req.user.email });
+    } else {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
     res.status(200).json({ teams });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching teams', error });
@@ -209,27 +220,6 @@ app.post('/api/import-roster', authenticateToken, isInstructor, (req, res) => {
       }
     });
 });
-
-// Students can view their teams
-app.get('/api/my-teams', authenticateToken, async (req, res) => {
-  try {
-    const teams = await Team.find({ students: req.user.userId }).populate('students instructor');
-    res.status(200).json({ teams });
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching teams', error });
-  }
-});
-
-// Instructors can view teams they created
-app.get('/api/instructor-teams', authenticateToken, isInstructor, async (req, res) => {
-  try {
-    const teams = await Team.find({ instructor: req.user.userId }).populate('students');
-    res.status(200).json({ teams });
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching teams', error });
-  }
-});
-
 
 //Export groups as CSV file
 //need 'csv-writer'

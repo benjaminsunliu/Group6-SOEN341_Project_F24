@@ -40,7 +40,7 @@ const Navbar = (props) => {
     }
   };
   
-  // TODO: get first name info and print to navbar
+  
   const renderCustomNavbar = () => {
     switch(userRole) {
       case 'student': 
