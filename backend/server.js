@@ -94,7 +94,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ userId: user._id, role: user.role, fName: user.fName, lName: user.lName, email: user.email}, jwtSecret, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id, role: user.role }, jwtSecret, { expiresIn: '1h' });
 
     // Set cookie options
     const cookieOptions = {
@@ -166,33 +166,12 @@ app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) =
 
 app.get('/api/get-teams', authenticateToken, async (req, res) => {
   try {
-    let studentTeams = [];
-    let otherTeams = [];
-
-    if (req.user.role === 'student') {
-      // Fetch teams where the student's email is in the members array
-      studentTeams = await Team.find({ members: req.user.email }); // Teams student is in
-      
-      // Fetch all teams excluding those the student is in
-      otherTeams = await Team.find({ members: { $ne: req.user.email } }); // All other teams
-    } else if (req.user.role === 'instructor') {
-      // Fetch teams associated with the instructor
-      studentTeams = await Team.find({ userId: req.user.userId }); // Teams created by instructor
-      otherTeams = await Team.find(); // Optionally, fetch all teams for instructor
-      
-      // You can filter out teams that the instructor is already a part of if needed:
-      // otherTeams = await Team.find({ _id: { $nin: studentTeams.map(team => team._id) } });
-    } else {
-      return res.status(403).json({ message: 'Forbidden: Invalid role' });
-    }
-
-    res.status(200).json({ studentTeams, otherTeams });
+    const teams = await Team.find({ userId: req.user.userId });
+    res.status(200).json({ teams });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching teams', error });
   }
 });
-
-
 
 
 // Route for instructors to import students from CSV and create a team
