@@ -1,5 +1,4 @@
-import InstructorDashboard from "../pages/InstructorDashboard";
-import Button from "./Button";
+
 import CollapsableButton from "./CollapsableButton";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -39,7 +38,11 @@ const GroupList = (props) => {
     };
 
     fetchTeams();
-  }); // Runs when at all times
+  }, []); // Runs when at all times
+
+  if (loading) {
+    return <div>Loading teams...</div>; // Show loading message while fetching data
+  }
 
   return (
     <>
