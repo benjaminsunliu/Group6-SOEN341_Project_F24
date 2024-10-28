@@ -16,15 +16,15 @@ const GroupForm = ({ students }) => {
 
     const selectionHandler = (e) => { 
 
-        const studentEmail = e.target.value;
+        const studentID = e.target.value;
         setGroupMembers((currentGroup) => {
             // If student is already in that group, then remove them
-            if(currentGroup.includes(studentEmail)) {
-                return currentGroup.filter(email => email !== studentEmail);
+            if(currentGroup.includes(studentID)) {
+                return currentGroup.filter(id => id !== studentID);
             }
             else {
                 // Add student to end of array
-                return [...currentGroup, studentEmail];
+                return [...currentGroup, studentID];
             }
         })
     }
