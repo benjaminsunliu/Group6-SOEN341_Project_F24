@@ -51,12 +51,13 @@ const GroupList = (props) => {
           <tr></tr>
           {teams.map((team, index) => (
             // would use group name or something else as the key w=once we can access the database
-            <tr key={teams.id}>
+            <tr key={team._id}>
               <div style={{ margin: "1px" }}>
                 <CollapsableButton
                   // once we can fetch group names from database change the buttonText to the actual group name
                   buttonText={team.name}
                   buttonColor="btn btn-primary"
+                  buttonArray={team.members}
                 />
               </div>
             </tr>

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import { useEffect } from "react";
+import { redirect, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import "./Dashboard.css";
 import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
@@ -9,39 +9,36 @@ import SingleFileUploader from "../components/SingleFileUploader";
 import GroupForm from "../components/GroupForm";
 import StudentTable from "../components/StudentTable";
 import GroupList from "../components/GroupList";
-import axios from 'axios';
-
+import axios from "axios";
 
 const InstructorDashboard = (props) => {
-
   const navigate = useNavigate();
-  
+
   // TODO: Implement backend roster import functionality
   const importCourseRoster = (file) => {
     alert(`File to upload: ${file.name}`);
   };
 
   useEffect(() => {
-    const token = Cookies.get('token'); // Get the token from cookies
+    const token = Cookies.get("token"); // Get the token from cookies
     if (token) {
       const decodedToken = jwtDecode(token);
       const { role } = decodedToken; // Get the role from the decoded token
 
       // Check if the role is not 'instructor'
-      if (role !== 'instructor') {
-        navigate('/'); // Redirect to login if not an instructor
+      if (role !== "instructor") {
+        navigate("/"); // Redirect to login if not an instructor
       }
     } else {
-      navigate('/login'); // Redirect to login if no token is found
+      navigate("/login"); // Redirect to login if no token is found
     }
   }, [navigate]);
 
   const exportcsv = async (e) => {
     e.preventDefault();
     try {
-      window.location.href = 'http://localhost:5050/api/export-groups';
-    }
-    catch (error) {
+      window.location.href = "http://localhost:5050/api/export-groups";
+    } catch (error) {
       console.error(error);
     }
   };
@@ -213,7 +210,7 @@ const InstructorDashboard = (props) => {
       fname: "Omar",
       lname: "Khan",
       assessment: "Assignment 1",
-    }
+    },
   ];
 
   const tabsData = [
@@ -225,7 +222,11 @@ const InstructorDashboard = (props) => {
           <StudentTable
             tableContents={{ headers: tableHeaders, contents: students }}
           />
-          <SingleFileUploader fileExtension="csv" fileDescription="course roster" fileSubmitHandler={importCourseRoster}/>
+          <SingleFileUploader
+            fileExtension="csv"
+            fileDescription="course roster"
+            fileSubmitHandler={importCourseRoster}
+          />
         </div>
       ),
     },
@@ -234,26 +235,28 @@ const InstructorDashboard = (props) => {
       label: "Groups",
       content: (
         <div class="Dashboard-contents">
-          <GroupForm students={students} />
           {/* If I want to access students array from inside GroupList I need to pass it to that component */}
-          <GroupList text="Groups go here" students={students} />
-          <Button buttonText="Export Groups as CSV" buttonColor="btn btn-secondary" onClick={exportcsv}/>
+          <GroupList />
+          <GroupForm students={students} />
+          <Button
+            buttonText="Export Groups as CSV"
+            buttonColor="btn btn-secondary"
+            onClick={exportcsv}
+          />
         </div>
       ),
     },
     {
       id: "assessments",
       label: "Assessments",
-      content: (
-        <div class="Dashboard-contents">Peer assessments go here
-        </div>)
+      content: <div class="Dashboard-contents">Peer assessments go here</div>,
     },
   ];
 
   return (
     <>
       <h1 class="Dashboard-header">Course Name</h1>
-      <div class=""> 
+      <div class="">
         <TabContainer tabs={tabsData} />
       </div>
     </>
