@@ -6,6 +6,7 @@ import "./Dashboard.css";
 import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
 import GroupList from "../components/GroupList";
+import RatingForm from "../components/RatingForm";
 
 
 const StudentDashboard = (props) => {
@@ -34,8 +35,9 @@ const StudentDashboard = (props) => {
       label: "Assessments",
       content: (
         <div class="Dashboard-contents">
-            <p>Group list and "assess" buttons will be here</p>
+            <p>Your Groups</p>
             <GroupList/>
+            <RatingForm/>
 
         </div>
         ),

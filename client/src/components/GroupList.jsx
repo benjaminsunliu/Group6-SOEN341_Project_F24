@@ -38,7 +38,7 @@ const GroupList = (props) => {
     };
 
     fetchTeams();
-  }, []); // Runs when at all times
+  },[]); // Runs when at all times
 
   if (loading) {
     return <div>Loading teams...</div>; // Show loading message while fetching data

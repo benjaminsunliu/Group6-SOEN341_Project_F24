@@ -46,6 +46,21 @@ const teamSchema = new mongoose.Schema({
   members: [{ type: String, required: true }], // List of team members' emails
 });
 
+// Rating Schema
+const ratingSchema = new mongoose.Schema({
+  raterEmail: { type: String, required: true}, //Email of the student rating
+  ratedEmail: { type: String, required: true }, // Email of the student being rated
+  cooperation: { type: Number, required: true, min: 1, max: 5 }, // Rating for cooperation
+  conceptualContribution: { type: Number, required: true, min: 1, max: 5 }, // Rating for conceptual contribution
+  practicalContribution: { type: Number, required: true, min: 1, max: 5 }, // Rating for practical contribution
+  workEthic: { type: Number, required: true, min: 1, max: 5 }, // Rating for work ethic
+  comments: { type: String, maxlength: 500 }, // Optional comments about the rating
+});
+
+// Create the Rating model
+const Rating = mongoose.model('Rating', ratingSchema);
+module.exports = Rating;
+
 // Password hashing middleware
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
@@ -261,6 +276,67 @@ app.get('/api/export-groups', authenticateToken, isInstructor, async (req, res) 
 app.post('/api/instructor-dashboard', authenticateToken, isInstructor, async (req, res) => {
   res.status(200).json({ message: 'Welcome, instructor!' });
 });
+
+
+//rating creation api
+app.post('/api/rate', async (req, res) => {
+  const { raterEmail, ratedEmail, cooperation, conceptualContribution, practicalContribution, workEthic, comments } = req.body;
+
+  try {
+    // Check if the rater has already rated this teammate
+    const alreadyRated = await Rating.findOne({ raterEmail, ratedEmail });
+    
+    if (alreadyRated) {
+      return res.status(400).json({ message: 'You have already rated this teammate.' });
+    }
+
+    // Save the rating
+    const newRating = new Rating({
+      raterEmail,
+      ratedEmail,
+      cooperation,
+      conceptualContribution,
+      practicalContribution,
+      workEthic,
+      comments,
+    });
+
+    await newRating.save();
+    res.json({ message: 'Rating submitted successfully!' });
+  } catch (error) {
+    console.error("Error submitting rating:", error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint to get rated members for a specific rater
+app.get('/api/rated-members/:raterEmail', async (req, res) => {
+  const { raterEmail } = req.params;
+  
+  try {
+    const ratedMembers = await Rating.find({ raterEmail });
+    const ratedEmails = ratedMembers.map(rating => rating.ratedEmail);
+    res.json({ ratedEmails });
+  } catch (error) {
+    console.error("Error fetching rated members:", error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+// api to get student's team members
+app.get('/api/team-members', authenticateToken, async (req, res) => {
+  try {
+    const teams = await Team.find({ members: req.user.email });
+    const members = teams.flatMap(team => team.members); // Extract all members' emails
+    res.status(200).json({ members: [...new Set(members)] }); // Remove duplicates
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching team members', error });
+  }
+});
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
