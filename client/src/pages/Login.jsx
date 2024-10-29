@@ -1,5 +1,7 @@
 import { Link, useNavigate} from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect} from "react";
+import Cookies from "js-cookie";
+import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 
 const Login = (props) => {
@@ -7,6 +9,14 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Cookies.get("token"); // Get the token from cookies
+    if (token) {
+      alert("You are already logged in!");
+      navigate("/");
+    }
+  }, [navigate]);
 
 
   const loginFunc = async (e) => {
