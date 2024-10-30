@@ -8,6 +8,10 @@ const jwt = require('jsonwebtoken');
 const csv = require('csv-parser');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
+const { createObjectCsvWriter } = require('csv-writer');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 
 // Initialize express app
 const app = express();
@@ -46,6 +50,15 @@ const teamSchema = new mongoose.Schema({
   members: [{ type: String, required: true }], // List of team members' emails
 });
 
+// Student Schema
+const studentSchema = new mongoose.Schema({
+  fname: { type: String, required: true },
+  lname: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  studentID: { type: String, required: true, unique: true },
+  phone: { type: String, required: true },
+});
+
 // Rating Schema
 const ratingSchema = new mongoose.Schema({
   raterEmail: { type: String, required: true}, //Email of the student rating
@@ -75,8 +88,7 @@ const usersCollection = database.collection('users');
 const teamsCollection = database.collection('teams');
 
 const User = mongoose.model('User', userSchema);
-
-
+const Student = mongoose.model('Student', studentSchema);
 const Team = mongoose.model('Team', teamSchema);
 
 // Middleware to authenticate JWT tokens
@@ -201,45 +213,80 @@ app.get('/api/get-teams', authenticateToken, async (req, res) => {
 });
 
 
-// Route for instructors to import students from CSV and create a team
-app.post('/api/import-roster', authenticateToken, isInstructor, (req, res) => {
-  const { teamName } = req.body;
-  const instructorId = req.user.userId;
+//Import groups as CSV file
+app.post('/api/import-roster', authenticateToken, isInstructor, upload.single('file'), (req, res) => {
   const students = [];
 
-  fs.createReadStream('path/roster.csv')
-    .pipe(csv())
+  fs.createReadStream(req.file.path)
+    .pipe(csv({
+      mapHeaders: ({ header }) => {
+        switch (header) {
+          case 'fname': return 'fname';
+          case 'lname': return 'lname';
+          case 'email': return 'email';
+          case 'studentID': return 'studentID';
+          case 'phone': return 'phone';
+          default: return header;
+        }
+      },
+      skipLinesWithError: true,
+      skipEmptyLines: true
+
+      
+    }))
     .on('data', (row) => {
-      students.push(row.email);  // Assuming CSV contains an 'email' field
+      // Trim whitespace from each field
+      const trimmedRow = {
+        fname: row.fname ? row.fname.trim() : '',
+        lname: row.lname ? row.lname.trim() : '',
+        email: row.email ? row.email.trim() : '',
+        studentID: row.studentID ? row.studentID.trim() : '',
+        phone: row.phone ? row.phone.trim() : ''
+      };
+
+      if (trimmedRow.fname && trimmedRow.lname && trimmedRow.email && trimmedRow.studentID && trimmedRow.phone) {
+        console.log('Processing row:', trimmedRow); // Log each row
+        students.push(trimmedRow);
+      } else {
+        console.warn('Skipping incomplete row:', trimmedRow); // Log incomplete rows
+      }
     })
     .on('end', async () => {
       try {
-        // Find or create users for each student email
-        const studentDocs = await Promise.all(
-          students.map(async (email) => {
-            let student = await User.findOne({ email });
-            if (!student) {
-              student = new User({ email, password: 'defaultpassword', role: 'student' });
-              await student.save();
-            }
-            return student._id;
-          })
-        );
-
-        // Create the team
-        const team = new Team({ name: teamName, instructor: instructorId, students: studentDocs });
-        await team.save();
-
-        res.status(200).json({ message: 'Roster imported successfully and team created!', team });
+        for (const student of students) {
+          const existingStudent = await Student.findOne({ studentID: student.studentID });
+          if (existingStudent) {
+            await Student.updateOne(
+              { studentID: student.studentID },
+              { $set: student }
+            );
+          } else {
+            const newStudent = new Student(student);
+            await newStudent.save();
+          }
+        }
+        res.status(200).json({ message: 'Roster imported successfully and students updated!' });
       } catch (error) {
-        res.status(500).json({ message: 'Error importing roster', error });
+        console.error('Error updating students:', error);
+        res.status(500).json({ message: 'Error updating students', error });
       }
     });
 });
 
+app.get('/api/students', authenticateToken, isInstructor, async (req, res) => {
+  try {
+    const students = await Student.find({});
+    res.status(200).json(students);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ message: 'Error fetching students', error });
+  }
+});
+
+
+
+
 //Export groups as CSV file
-//need 'csv-writer'
-const { createObjectCsvWriter } = require('csv-writer');
 //api/export-groups
 app.get('/api/export-groups', authenticateToken, isInstructor, async (req, res) => {
   try {
