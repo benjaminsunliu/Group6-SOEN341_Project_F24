@@ -1,3 +1,13 @@
+Added the import functionality that allows instructor to import multiple participants from csv file. ID, email, and phone must be different in order for the file to be there otherwise it will overwrite it. 
+
+In order to run do, 
+
+1. npm install
+2. npm install multer
+3. npm start
+
+Make sure the file.csv cotnains different ID, email and phone
+   
 # Group6-SOEN341_Project_F24
 ## Project Description
 University team projects often struggle with unequal contributions and lack accountability. This peer assessment platform enables students to evaluate their teammates across four key dimensions, promoting accountability and offering valuable feedback for both students and instructors.
