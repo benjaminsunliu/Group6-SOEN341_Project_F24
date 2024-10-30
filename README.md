@@ -48,8 +48,7 @@ University team projects often struggle with unequal contributions and lack acco
    - For file uploads, run npm install multer
      
 ### Run the Application
-   - Run npm start
-
+   - Start the application with npm start and access it at http://localhost:3000.
 
 ### Conclusion
 
