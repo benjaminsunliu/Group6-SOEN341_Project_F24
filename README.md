@@ -36,4 +36,21 @@ University team projects often struggle with unequal contributions and lack acco
 - [Anthony Phelps](https://github.com/oldgrandma101), BEng. Computer Engineering (C. Edge) (2022-2026)
 - [Ella Noyes](https://github.com/en4395), BEng. Computer Engineering (C. Edge) (2022-2026)
 
+### Running the Project
 
+### Prerequisites
+
+  - Make sure you have Node.js installed 
+  - Have MongoDB installed to see changes in the database
+    
+### Install Dependencies
+   - Run npm install command to install all required dependencies
+   - For file uploads, run npm install multer
+     
+### Run the Application
+   - Run npm start
+
+
+Conclusion
+
+This peer assessment platform aims to foster a collaborative and accountable environment for students working on team projects, ultimately leading to a more equitable and productive learning experience.
