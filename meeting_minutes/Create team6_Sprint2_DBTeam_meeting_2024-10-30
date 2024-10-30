@@ -1,0 +1,23 @@
+Meeting Minutes
+
+Meeting Details
+Date: October 30 2024
+Time: 12pm-3:30pm
+Location: Discord server
+Attendees: Mehrad Mostaan, Mustafa Alawadi
+Absent: DB meeting so nobody was absent
+
+Agenda:
+
+We met to completed the import functionality in the back-end server, we then tested the import on UI, by importing different .csv files, 
+checked on database (new informations from .csv files), then tested new added students by adding them into new groups, then exporting new groups via a .csv file.
+
+
+Adjournment: 
+
+Task was completed and tested
+
+
+
+Next Step
+Upcoming Meetings: Quick follow up meeting with other members before the demo.
