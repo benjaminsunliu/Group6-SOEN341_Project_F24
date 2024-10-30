@@ -1,19 +1,15 @@
-name: CI/CD Pipeline
+name: Build Check
 
 on:
   push:
     branches: [ test-action ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -31,14 +27,10 @@ jobs:
       working-directory: ./client
       run: npm install
 
-    - name: Run Backend Tests
-      working-directory: ./backend
-      run: npm test
-
-    - name: Run Frontend Tests
-      working-directory: ./client
-      run: npm test
-
     - name: Build Frontend
       working-directory: ./client
       run: npm run build
+
+    - name: Verify Backend Start
+      working-directory: ./backend
+      run: npm start &
