@@ -2,9 +2,9 @@ name: Build Check
 
 on:
   push:
-    branches: [ test-action ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
