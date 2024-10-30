@@ -42,6 +42,8 @@ University team projects often struggle with unequal contributions and lack acco
 
   - Make sure you have Node.js installed 
   - Have MongoDB installed to see changes in the database
+  - Have the CSV files ready for testing, ensure the format is fname	lname	email	studentID	phone
+
     
 ### Install Dependencies
    - Run npm install command to install all required dependencies
@@ -49,6 +51,8 @@ University team projects often struggle with unequal contributions and lack acco
      
 ### Run the Application
    - Start the application with npm start and access it at http://localhost:3000.
+
+
 
 ### Conclusion
 
