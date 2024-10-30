@@ -1,0 +1,27 @@
+Meeting Minutes
+
+Meeting Details
+Date: October 29 2024
+Time: 8pm-2am
+Location: Discord server
+Attendees: Mehrad Mostaan, Mustafa Alawadi
+Absent: DB meeting so nobody was absent
+
+Agenda:
+
+We first started transfering hardcoded datas(student fname,lname, email, ID and phone) from the UI to the database( under database : tests, under collection : students), 
+by adjusting the code on the "instructorDashboard.jsx". Datas are now available on the MongoDB Atlas.
+
+Then the main task was discussed, we were introduced to multer, which is a middleware module designed for node.js, 
+it is primarily used for handling multipart/form-data, which is the format used for file uploads, such as .csv files.
+
+The import functionality was added to the back end, but not completed. 
+
+Adjournment: 
+
+We have decided to make another meeting together tomorrow on Discord server, to complete the task.
+
+
+
+Next Step
+Upcoming Meetings: Follow up meeting on October 30, 2024 to complete discussed task.
