@@ -1,0 +1,10 @@
+fname,lname,email,studentID,phone
+Hiroshi,Tanaka,hiroshi.tanaka@example.com,87654321,080-1234-5678
+Yuki,Sato,yuki.sato@example.com,98765432,080-2345-6789
+Kenta,Suzuki,kenta.suzuki@example.com,19876543,080-3456-7890
+Aiko,Takahashi,aiko.takahashi@example.com,10987654,080-4567-8901
+Haruto,Kobayashi,haruto.kobayashi@example.com,21098765,080-5678-9012
+Sakura,Yamamoto,sakura.yamamoto@example.com,32109876,080-6789-0123
+Ren,Ito,ren.ito@example.com,43210987,080-7890-1234
+Mio,Watanabe,mio.watanabe@example.com,54321098,080-8901-2345
+Daiki,Nakamura,daiki.nakamura@example.com,65432109,080-9012-3456
