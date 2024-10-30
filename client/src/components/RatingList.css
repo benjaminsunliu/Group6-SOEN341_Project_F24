@@ -1,0 +1,20 @@
+.rating-item {
+    border: 1px solid black; /* Thin black border */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding-top: 15px; /* top space inside the box */
+    padding-bottom: 15px;
+    padding-left: 5vh;
+    padding-right: 75vh;
+    margin-bottom: 15px; /* Space between boxes */
+    background-color: lightgray; 
+  }
+  
+  .rating-item p {
+    margin: 5px 0; /* Spacing between text lines */
+    padding: 0;
+  }
+
+  .rating-list {
+    list-style-type: none;
+    padding: 0;
+  }

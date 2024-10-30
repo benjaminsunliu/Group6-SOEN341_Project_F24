@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { jwtDecode } from "jwt-decode"; // Change this line
+import { jwtDecode } from "jwt-decode";
 import "./RatingForm.css";
 
 const RatingForm = () => {
@@ -83,6 +83,14 @@ const RatingForm = () => {
     }
   };
 
+  //confirmation alert
+  const confirmSubmission = () => {
+    const confirm = window.confirm("Are you sure you want to submit this rating?");
+    if (confirm) {
+      submitRating();
+    }
+  };
+
   return (
     <div>
       <button onClick={() => setShowForm(true)}>Rate Your Peers</button>
@@ -91,18 +99,18 @@ const RatingForm = () => {
         <div className="overlay">
           <div className="slide-in-form">
             <button className="close-btn" onClick={() => setShowForm(false)}>X</button>
-            <h2>Rate Your Teammates</h2>
+            <h2>Rate Your Peers</h2>
             {loading ? (
               <p>Loading team members...</p>
             ) : (
               <>
-                <label htmlFor="member-select">Select a teammate:</label>
+                <label htmlFor="member-select">Select a peer:</label>
                 <select
                   id="member-select"
                   value={selectedEmail}
                   onChange={(e) => setSelectedEmail(e.target.value)}
                 >
-                  <option value="">--Select a teammate--</option>
+                  <option value="">--Select a peer--</option>
                   {members.map((member) => (
                     <option key={member} value={member}>
                       {member}
@@ -163,7 +171,7 @@ const RatingForm = () => {
                   />
                 </div>
 
-                <button onClick={submitRating}>Submit Rating</button>
+                <button onClick={confirmSubmission}>Submit Rating</button>
               </>
             )}
           </div>
