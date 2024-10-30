@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { jwtDecode } from "jwt-decode"; // Change this line
+import { jwtDecode } from "jwt-decode";
 import "./RatingForm.css";
 
 const RatingForm = () => {
@@ -80,6 +80,14 @@ const RatingForm = () => {
       } else {
         console.error("Error submitting rating:", error);
       }
+    }
+  };
+
+  //confirmation alert
+  const confirmSubmission = () => {
+    const confirm = window.confirm("Are you sure you want to submit this rating?");
+    if (confirm) {
+      submitRating();
     }
   };
 
@@ -163,7 +171,7 @@ const RatingForm = () => {
                   />
                 </div>
 
-                <button onClick={submitRating}>Submit Rating</button>
+                <button onClick={confirmSubmission}>Submit Rating</button>
               </>
             )}
           </div>
