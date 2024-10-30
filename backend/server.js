@@ -335,6 +335,19 @@ app.get('/api/team-members', authenticateToken, async (req, res) => {
   }
 });
 
+//api to get student ratings
+app.get('/api/user-ratings/:email', async (req, res) => {
+  const { email } = req.params;
+  try {
+    const ratings = await Rating.find({ ratedEmail: email });
+    res.json(ratings);
+  } catch (error) {
+    console.error("Error fetching ratings:", error);
+    res.status(500).json({ message: "Failed to fetch ratings" });
+  }
+});
+
+
 
 
 // Start the server

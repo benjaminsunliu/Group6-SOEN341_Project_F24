@@ -99,18 +99,18 @@ const RatingForm = () => {
         <div className="overlay">
           <div className="slide-in-form">
             <button className="close-btn" onClick={() => setShowForm(false)}>X</button>
-            <h2>Rate Your Teammates</h2>
+            <h2>Rate Your Peers</h2>
             {loading ? (
               <p>Loading team members...</p>
             ) : (
               <>
-                <label htmlFor="member-select">Select a teammate:</label>
+                <label htmlFor="member-select">Select a peer:</label>
                 <select
                   id="member-select"
                   value={selectedEmail}
                   onChange={(e) => setSelectedEmail(e.target.value)}
                 >
-                  <option value="">--Select a teammate--</option>
+                  <option value="">--Select a peer--</option>
                   {members.map((member) => (
                     <option key={member} value={member}>
                       {member}

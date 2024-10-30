@@ -7,6 +7,7 @@ import TabContainer from "../components/TabContainer";
 import Button from "../components/Button";
 import GroupList from "../components/GroupList";
 import RatingForm from "../components/RatingForm";
+import RatingList from "../components/RatingList";
 
 
 const StudentDashboard = (props) => {
@@ -48,6 +49,7 @@ const StudentDashboard = (props) => {
       content: (
         <div class="Dashboard-contents">
             <p>Your profile is missing reviews from one or more of your peers. You may not yet access your personal report.</p>
+            <RatingList/>
         </div>
       ),    
     },
