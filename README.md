@@ -1,13 +1,3 @@
-Added the import functionality that allows instructor to import multiple participants from csv file. ID, email, and phone must be different in order for the file to be there otherwise it will overwrite it. 
-
-In order to run do, 
-
-1. npm install
-2. npm install multer
-3. npm start
-
-Make sure the file.csv cotnains different ID, email and phone
-   
 # Group6-SOEN341_Project_F24
 ## Project Description
 University team projects often struggle with unequal contributions and lack accountability. This peer assessment platform enables students to evaluate their teammates across four key dimensions, promoting accountability and offering valuable feedback for both students and instructors.
@@ -22,6 +12,32 @@ University team projects often struggle with unequal contributions and lack acco
 - **Anonymous Peer Evaluations**: Encourages fair and honest feedback.
 - **Peer Feedback Summaries for Instructors**: Helps instructors assess team dynamics and evaluate each student’s performance and contributions.
 - **Personal Feedback Report for Students**: Offers students constructive feedback on their contributions, encouraging personal growth.
+
+## Installation Instructions
+### Prerequisites
+- Node.js and npm: Install Node.js, which includes npm, the Node package manager. You can download it from the official Node.js website.
+- MongoDB: Install MongoDB to manage the project's database. Download it from the official MongoDB website.
+### Steps
+- Clone the Repository:`git clone https://github.com/benjaminsunliu/Group6-SOEN341_Project_F24.git`
+- Navigate to the Project Directory: `cd Group6-SOEN341_Project_F24`
+- Backend Setup:
+```
+cd backend
+npm install
+node server
+```
+The backend server will run on http://localhost:5050.
+
+- Frontend Setup:
+```
+cd ../client
+npm install
+npm start
+```
+The frontend will run on http://localhost:3000.
+
+Accessing the Application:
+Open your browser and navigate to http://localhost:3000 to use the application.
 
 ## Technology Stack
 - **Node.js**
