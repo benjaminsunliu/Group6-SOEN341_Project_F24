@@ -9,11 +9,8 @@ import SingleFileUploader from "../components/SingleFileUploader";
 import GroupForm from "../components/GroupForm";
 import StudentTable from "../components/StudentTable";
 import GroupList from "../components/GroupList";
+import InstructorRatings from "../components/InstructorRatings";
 import axios from "axios";
-
-
-
-
 
 const InstructorDashboard = (props) => {
   const navigate = useNavigate();
@@ -126,7 +123,7 @@ const InstructorDashboard = (props) => {
     {
       id: "assessments",
       label: "Assessments",
-      content: <div class="Dashboard-contents">Peer assessments go here</div>,
+      content: <div class="Dashboard-contents"><InstructorRatings /></div>,
     },
   ];
 

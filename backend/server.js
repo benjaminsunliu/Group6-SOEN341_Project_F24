@@ -192,6 +192,7 @@ app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) =
   }
 });
 
+// Get the teams based on role
 app.get('/api/get-teams', authenticateToken, async (req, res) => {
   try {
     let teams;
@@ -371,7 +372,7 @@ app.get('/api/rated-members/:raterEmail', async (req, res) => {
 });
 
 
-// api to get student's team members
+// api for students to get their teams and team members
 app.get('/api/team-members', authenticateToken, async (req, res) => {
   try {
     const teams = await Team.find({ members: req.user.email });
@@ -382,7 +383,7 @@ app.get('/api/team-members', authenticateToken, async (req, res) => {
   }
 });
 
-//api to get student ratings
+//api for students to get their ratings based on their email
 app.get('/api/user-ratings/:email', async (req, res) => {
   const { email } = req.params;
   try {
@@ -393,6 +394,40 @@ app.get('/api/user-ratings/:email', async (req, res) => {
     res.status(500).json({ message: "Failed to fetch ratings" });
   }
 });
+
+//api for instructors to get their students' ratings
+app.get('/api/instructor/:_id/ratings', async (req, res) => {
+  const instructorId = req.params._id;  // Use _id from the URL
+
+  try {
+      // Find all teams where userId matches the instructor's _id
+      const teams = await Team.find({ userId: instructorId });
+
+      // Get all student emails from the teams
+      const studentEmails = teams.flatMap(team => team.members);
+      const uniqueStudentEmails = [...new Set(studentEmails)]; // Removes duplicate emails
+
+      // Get ratings for each unique student email
+      const ratingsPromises = uniqueStudentEmails.map(email =>
+          Rating.find({ ratedEmail: email })
+      );
+
+      // Wait for all ratings to be fetched
+      const ratingsResults = await Promise.all(ratingsPromises);
+
+      // Structure the ratings by each student's email
+      const ratingsByStudent = uniqueStudentEmails.reduce((acc, email, index) => {
+          acc[email] = ratingsResults[index];
+          return acc;
+      }, {});
+
+      // Respond with both team and rating information
+      res.json({ teams, ratingsByStudent });
+  } catch (error) {
+      res.status(500).json({ error: 'Error fetching teams and ratings' });
+  }
+});
+
 
 
 

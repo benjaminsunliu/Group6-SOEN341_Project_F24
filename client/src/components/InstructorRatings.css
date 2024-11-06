@@ -1,0 +1,83 @@
+/* Common styles for both detailed and summary views */
+.rating-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .rating-item,
+  .rating-summary {
+    border: 1px solid black; /* Thin black border */
+    border-radius: 5px; /* Slightly rounded corners */
+    padding-top: 15px; /* top space inside the box */
+    padding-bottom: 15px;
+    padding-left: 5vh;
+    padding-right: 75vh;
+    margin-bottom: 15px; /* Space between boxes */
+    background-color: lightgray; 
+  }
+  
+  .rating-item p,
+  .rating-summary p {
+    margin: 5px 0;
+    padding: 0;
+  }
+  
+  .rating-item strong,
+  .rating-summary strong {
+    color: #333;
+  }
+  
+  /* Styles for rating summary */
+  .rating-summary {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .rating-summary p {
+    margin: 8px 0;
+  }
+  
+  /* Detailed View styles */
+  .rating-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .rating-list .rating-item {
+    display: block;
+    margin-bottom: 15px;
+  }
+  
+  .rating-item p {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Student Section */
+  .student-section {
+    margin-bottom: 25px;
+  }
+  
+  .student-section h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Team Section */
+  .team-section {
+    margin-bottom: 15px;
+  }
+  
+  .team-section h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
