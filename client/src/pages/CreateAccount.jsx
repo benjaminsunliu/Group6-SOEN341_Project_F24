@@ -5,6 +5,7 @@ import axios from "axios";
 const CreateAccount = (props) => {
     const navigate = useNavigate();  // Initialize useNavigate
     const [role, setRole] = useState('');  // State to store role
+    const [error, setError] = useState('');
 
     // TODO: Set up create account on the server side
     const loginHandler = async (event) => {
@@ -13,22 +14,25 @@ const CreateAccount = (props) => {
         const lName = document.getElementById("lName").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-    
+        
+        setError("");
+
         // Basic form validation
         if (!email || !password || !fName || !lName || !role) {
-            alert("Please fill out all fields.");
+            setError("Please fill out all fields.");
+            //alert("Please fill out all fields.");
             return;
         }
         // Email format validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address.");
+            setError("Please enter a valid email address.");
             return;
         }
         // Password format validation (e.g., minimum 8 characters, at least one number)
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
         if (!passwordRegex.test(password)) {
-            alert("Password must be at least 8 characters long, contain at least one number, one lowercase and one uppercase letter.");
+            setError("Password must be at least 8 characters long, contain at least one number, one lowercase and one uppercase letter.");
             return;
         }
     
@@ -59,7 +63,7 @@ const CreateAccount = (props) => {
             console.error("Error creating account:", error);
     
             if (error.response && error.response.status === 409) {
-                alert("Email already in use.");
+                setError("Email already in use.");
             } else {
                 alert("Error creating account. Please try again.");
             }
@@ -110,6 +114,9 @@ const CreateAccount = (props) => {
             />
             <label for="password">Create a password</label>
             </div>
+
+            {error && <div role="alert" className="alert alert-danger">{error}</div>}
+            
             <br/>
             {/* Role Selection via Radio Buttons */}
             <div>
