@@ -18,21 +18,24 @@ const Login = (props) => {
     }
   }, [navigate]);
 
+
   const loginFunc = async (e) => {
     e.preventDefault();
     setError('');
 
     if (!email || !password) {
-      setError("Please fill out all fields.");
+      alert("Please fill out all fields.");
       return;
-    }
+  }
 
     try {
+      // Basic form validation
+
       const response = await axios.post('http://localhost:5050/api/login', {
         email,
         password,
       }, {
-        withCredentials: true
+        withCredentials: true // Important: allows cookies to be sent with the request
       });
 
       const role = response.data.role;
@@ -43,67 +46,60 @@ const Login = (props) => {
         navigate('/instructor-dashboard');
       } else {
         alert("Successfully logged in as a student!");
-        navigate('/student-dashboard');
+        navigate('/student-dashboard'); // Redirect to a different page for non-instructor roles
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      alert(err.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 
   return (
-    <div className="body">
-      <main className="body">
-        <form onSubmit={loginFunc}>
-          <h1 className="h3 mb-3 fw-normal">Please login</h1>
+    <div class="body" >
+      <main className="body" class="body">
+        <form>
+          <h1 class="h3 mb-3 fw-normal">Please login</h1>
 
-          <div className="form-floating">
+          <div class="form-floating">
             <input
               type="email"
-              className="form-control"
+              class="form-control"
               id="floatingInput"
               placeholder="name@example.com"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} 
             />
-            <label htmlFor="floatingInput">Email address</label>
+            <label for="floatingInput">Email address</label>
           </div>
-
-          <div className="form-floating">
+          <div class="form-floating">
             <input
               type="password"
-              className="form-control"
+              class="form-control"
               id="floatingPassword"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label htmlFor="floatingPassword">Password</label>
+            <label for="floatingPassword">Password</label>
           </div>
 
-          {error && <div role="alert" className="alert alert-danger">{error}</div>}
-
-          <div className="form-check text-start my-3">
+          <div class="form-check text-start my-3">
             <input
-              className="form-check-input"
+              class="form-check-input"
               type="checkbox"
               value="remember-me"
               id="flexCheckDefault"
             />
-            <label className="form-check-label" htmlFor="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
               Remember me
             </label>
           </div>
-
-          <button className="btn btn-primary w-100 py-2" type="submit">
+          <button class="btn btn-primary w-100 py-2" type="submit" onClick = {loginFunc}>
             Login
           </button>
-
-          <br />
-          <br />
-
-          <Link className="nav-link" to="/create-account">
-            New user? Create an account
+          <br/>
+          <br/>
+          <Link class="nav-link" to="/create-account">
+                  New user? Create an account
           </Link>
-
-          <p className="mt-5 mb-3 text-body-secondary">&copy; Fall 2024</p>
+          <p class="mt-5 mb-3 text-body-secondary">&copy; Fall 2024</p>
         </form>
       </main>
     </div>
