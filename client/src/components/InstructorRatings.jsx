@@ -64,7 +64,7 @@ const InstructorRatings = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Student Assessments</h2>
       <button onClick={toggleView}>
         {isDetailedView ? 'Show Summary View' : 'Show Detailed View'}
@@ -85,43 +85,44 @@ const InstructorRatings = () => {
           </div>
 
           <div>
-            <h3>{isDetailedView ? 'Detailed Ratings by Student' : 'Summary Ratings by Student'}</h3>
-            {Object.entries(ratingsByStudent).map(([email, ratings], index) => (
-              <div key={index} className="student-section">
-                <h4>{email}</h4>
-                {isDetailedView ? (
-                  // Detailed View: List each individual rating
-                  <ul className="rating-list">
-                    {ratings.map((rating, idx) => (
-                      <li key={idx} className="rating-item">
-                        <p><strong>Rater:</strong> {rating.raterEmail}</p>
-                        <p><strong>Cooperation:</strong> {rating.cooperation}</p>
-                        <p><strong>Conceptual Contribution:</strong> {rating.conceptualContribution}</p>
-                        <p><strong>Practical Contribution:</strong> {rating.practicalContribution}</p>
-                        <p><strong>Work Ethic:</strong> {rating.workEthic}</p>
-                        <p><strong>Comments:</strong> {rating.comments || "No comments"}</p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  // Summary View: Display average scores and rating count
-                  <div className="rating-summary">
-                    {ratings.length > 0 ? (
-                      <>
-                        <p><strong>Average Cooperation:</strong> {calculateSummary(ratings).cooperation}</p>
-                        <p><strong>Average Conceptual Contribution:</strong> {calculateSummary(ratings).conceptualContribution}</p>
-                        <p><strong>Average Practical Contribution:</strong> {calculateSummary(ratings).practicalContribution}</p>
-                        <p><strong>Average Work Ethic:</strong> {calculateSummary(ratings).workEthic}</p>
-                        <p><strong>Total Ratings:</strong> {calculateSummary(ratings).count}</p>
-                      </>
-                    ) : (
-                      <p>No ratings available for this student.</p>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+  <h3>{isDetailedView ? 'Detailed Ratings by Student' : 'Summary Ratings by Student'}</h3>
+  {Object.entries(ratingsByStudent).map(([email, ratings], index) => (
+    <div key={index} className="student-section">
+      <h4>{email}</h4>
+      {isDetailedView ? (
+        // Detailed View: List each individual rating
+        <ul className="rating-records">
+          {ratings.map((rating, idx) => (
+            <li key={idx} className="rating-object rating-box">
+              <p><strong>Rater:</strong> {rating.raterEmail}</p>
+              <p><strong>Cooperation:</strong> {rating.cooperation}</p>
+              <p><strong>Conceptual Contribution:</strong> {rating.conceptualContribution}</p>
+              <p><strong>Practical Contribution:</strong> {rating.practicalContribution}</p>
+              <p><strong>Work Ethic:</strong> {rating.workEthic}</p>
+              <p><strong>Comments:</strong> {rating.comments || "No comments"}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        // Summary View: Display average scores and rating count
+        <div className="rating-summary rating-box">
+          {ratings.length > 0 ? (
+            <>
+              <p><strong>Average Cooperation:</strong> {calculateSummary(ratings).cooperation}</p>
+              <p><strong>Average Conceptual Contribution:</strong> {calculateSummary(ratings).conceptualContribution}</p>
+              <p><strong>Average Practical Contribution:</strong> {calculateSummary(ratings).practicalContribution}</p>
+              <p><strong>Average Work Ethic:</strong> {calculateSummary(ratings).workEthic}</p>
+              <p><strong>Total Ratings:</strong> {calculateSummary(ratings).count}</p>
+            </>
+          ) : (
+            <p>No ratings available for this student.</p>
+          )}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
         </>
       ) : (
         <p>No teams or ratings found.</p>

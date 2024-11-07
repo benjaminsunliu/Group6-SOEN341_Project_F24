@@ -358,7 +358,7 @@ app.post('/api/rate', async (req, res) => {
 });
 
 // Endpoint to get rated members for a specific rater
-app.get('/api/rated-members/:raterEmail', async (req, res) => {
+app.get('/api/rated-members/:raterEmail', authenticateToken, async (req, res) => {
   const { raterEmail } = req.params;
   
   try {
@@ -384,7 +384,7 @@ app.get('/api/team-members', authenticateToken, async (req, res) => {
 });
 
 //api for students to get their ratings based on their email
-app.get('/api/user-ratings/:email', async (req, res) => {
+app.get('/api/user-ratings/:email', authenticateToken, async (req, res) => {
   const { email } = req.params;
   try {
     const ratings = await Rating.find({ ratedEmail: email });
@@ -396,7 +396,7 @@ app.get('/api/user-ratings/:email', async (req, res) => {
 });
 
 //api for instructors to get their students' ratings
-app.get('/api/instructor/:_id/ratings', async (req, res) => {
+app.get('/api/instructor/:_id/ratings', authenticateToken, async (req, res) => {
   const instructorId = req.params._id;  // Use _id from the URL
 
   try {
