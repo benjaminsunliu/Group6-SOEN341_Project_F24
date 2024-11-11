@@ -1,90 +1,200 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from "react-router-dom";
+import mockAxios from 'jest-mock-axios';
 import CreateAccount from '../src/pages/CreateAccount';
 import '@testing-library/jest-dom';
 
+// Mock the useNavigate function from react-router-dom
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
+// Cleanup. Resets mock axios after every test and clears previous mock function calls
+afterEach(() => {
+  mockAxios.reset();
+  jest.clearAllMocks(); 
+});
+
+// **************************************************************************************************
+// TEST CREATE ACCOUNT FORM RENDERING
+// **************************************************************************************************
 test('renders create account form', () => {
-    render(
-      <BrowserRouter>
-        <CreateAccount />
-      </BrowserRouter>
-    );
-    
-    // Check that all fields render
-    expect(screen.getByPlaceholderText(/First Name/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Last Name/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/name@example.com/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
+  // Render CreateAccount page
+  render(
+    <BrowserRouter>
+      <CreateAccount />
+    </BrowserRouter>
+  );
+  
+  // Check that all fields render
+  expect(screen.getByPlaceholderText(/First Name/i)).toBeInTheDocument();
+  expect(screen.getByPlaceholderText(/Last Name/i)).toBeInTheDocument();
+  expect(screen.getByPlaceholderText(/name@example.com/i)).toBeInTheDocument();
+  expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
 });
 
-test('alerts for invalid email address', async() => {
-    const firstName = "Sheela";
-    const lastName = "Na'Gig";
-    const email = "dodgyemail.com";
-    const password = "str0ngPassw0rd!";
+// **************************************************************************************************
+// TEST SUCCESSFUL ACCOUNT CREATION
+// **************************************************************************************************
+test('redirects user to login page on successful account creation', async() => {
+  // Mock axios post to resolve with a 201 status
+  mockAxios.post.mockResolvedValue({ status: 201 });
 
-    render(
-        <BrowserRouter>
-          <CreateAccount />
-        </BrowserRouter>
-      );
-  
-    fireEvent.change(screen.getByPlaceholderText(/First Name/i), {
-        target: { value: firstName },
-    });
+  // Render CreateAccount page
+  render(
+    <BrowserRouter>
+      <CreateAccount />
+    </BrowserRouter>
+  );
 
-    fireEvent.change(screen.getByPlaceholderText(/Last Name/i), {
-        target: { value: lastName },
-    });
+  // Enter first name
+  fireEvent.change(screen.getByPlaceholderText(/First Name/i), {
+    target: { value: 'FirstName' },
+  });
 
-    fireEvent.change(screen.getByPlaceholderText(/name@example.com/i), {
-        target: { value: email },
-    });
+  // Enter last name
+  fireEvent.change(screen.getByPlaceholderText(/Last Name/i), {
+    target: { value: 'LastName' },
+  });
 
-    fireEvent.change(screen.getByPlaceholderText(/Password/i), {
-        target: { value: password },
-    });
+  // Enter email
+  fireEvent.change(screen.getByPlaceholderText(/name@example.com/i), {
+    target: { value: 'student@mail.concordia.ca' },
+  });
 
-    fireEvent.click(screen.getByLabelText(/student/i));
+  // Create password
+  fireEvent.change(screen.getByPlaceholderText(/Password/i), {
+    target: { value: 'Str0ngpassw0rd!' },
+  });
 
-    fireEvent.click(screen.getByRole('button', { name: /create account/i }));
+  // Create a student account
+  fireEvent.click(screen.getByLabelText('Student'));
 
-    await screen.findByRole('alert');
-    expect(screen.getByRole('alert')).toHaveTextContent('Please enter a valid email address.');
+  // Click the "Create Account" button
+  fireEvent.click(screen.getByRole("button", { name: /Create Account/i }));
+
+
+  // Wait for axios post request to resolve
+  await waitFor(() => {
+    // Verify that navigate was called with the correct path
+    expect(mockNavigate).toHaveBeenCalledWith("/login");
+  });
+})
+
+// **************************************************************************************************
+// TEST BASIC FORM VALIDATION
+// **************************************************************************************************
+test('shows error when fields are empty', async() => {
+  // Mock the alert function
+  const alertMock = jest.spyOn(window, 'alert').mockImplementation();
+
+  // Render CreateAccount page
+  render(
+    <BrowserRouter>
+      <CreateAccount />
+    </BrowserRouter>
+  );
+
+  // Click the login button
+  fireEvent.click(screen.getByRole('button', { name: /Create Account/i }));
+
+  // Check if alert was called with the correct message
+  expect(alertMock).toHaveBeenCalledWith("Please fill out all fields.");
+
+  // Cleanup
+  alertMock.mockRestore();
 });
 
-test('alerts for weak password', async() => {
-    const firstName = "Sheela";
-    const lastName = "Na'Gig";
-    const email = "queen_sheela@concordia.ca";
-    const password = "weakpassword";
+// **************************************************************************************************
+// TEST PASSWORD FORMAT VALIDATION
+// **************************************************************************************************
+test('shows error when password is weak', () => {
+  // Mock the alert function
+  const alertMock = jest.spyOn(window, 'alert').mockImplementation();
 
-    render(
-        <BrowserRouter>
-          <CreateAccount />
-        </BrowserRouter>
-      );
-  
-    fireEvent.change(screen.getByPlaceholderText(/First Name/i), {
-        target: { value: firstName },
-    });
+  // Render CreateAccount page
+  render(
+    <BrowserRouter>
+      <CreateAccount />
+    </BrowserRouter>
+  );
 
-    fireEvent.change(screen.getByPlaceholderText(/Last Name/i), {
-        target: { value: lastName },
-    });
+  // Enter first name
+  fireEvent.change(screen.getByPlaceholderText(/First Name/i), {
+    target: { value: 'FirstName' },
+  });
 
-    fireEvent.change(screen.getByPlaceholderText(/name@example.com/i), {
-        target: { value: email },
-    });
+  // Enter last name
+  fireEvent.change(screen.getByPlaceholderText(/Last Name/i), {
+    target: { value: 'LastName' },
+  });
 
-    fireEvent.change(screen.getByPlaceholderText(/Password/i), {
-        target: { value: password },
-    });
+  // Enter email
+  fireEvent.change(screen.getByPlaceholderText(/name@example.com/i), {
+    target: { value: 'student@mail.concordia.ca' },
+  });
 
-    fireEvent.click(screen.getByLabelText(/student/i));
+  // Create password
+  fireEvent.change(screen.getByPlaceholderText(/Password/i), {
+    target: { value: 'weakpassword' },
+  });
 
-    fireEvent.click(screen.getByRole('button', { name: /create account/i }));
+  // Create a student account
+  fireEvent.click(screen.getByLabelText('Student'));
 
-    await screen.findByRole('alert');
-    expect(screen.getByRole('alert')).toHaveTextContent('Password must be at least 8 characters long, contain at least one number, one lowercase and one uppercase letter.');
+  // Click the "Create Account" button
+  fireEvent.click(screen.getByRole("button", { name: /Create Account/i }));
+
+  expect(alertMock).toHaveBeenCalledWith("Password must be at least 8 characters long, contain at least one number, one lowercase and one uppercase letter.");
+
+  // Cleanup
+  alertMock.mockRestore();
+});
+
+// **************************************************************************************************
+// TEST EMAIL FORMAT VALIDATION
+// **************************************************************************************************
+test('shows error when email format is not valid', () => {
+  // Mock the alert function
+  const alertMock = jest.spyOn(window, 'alert').mockImplementation();
+
+  // Render CreateAccount page
+  render(
+    <BrowserRouter>
+      <CreateAccount />
+    </BrowserRouter>
+  );
+
+  // Enter first name
+  fireEvent.change(screen.getByPlaceholderText(/First Name/i), {
+    target: { value: 'FirstName' },
+  });
+
+  // Enter last name
+  fireEvent.change(screen.getByPlaceholderText(/Last Name/i), {
+    target: { value: 'LastName' },
+  });
+
+  // Enter email
+  fireEvent.change(screen.getByPlaceholderText(/name@example.com/i), {
+    target: { value: 'invalidemail.com' },
+  });
+
+  // Create password
+  fireEvent.change(screen.getByPlaceholderText(/Password/i), {
+    target: { value: 'Str0ngpassw0rd!' },
+  });
+
+  // Create a student account
+  fireEvent.click(screen.getByLabelText('Student'));
+
+  // Click the "Create Account" button
+  fireEvent.click(screen.getByRole("button", { name: /Create Account/i }));
+
+  expect(alertMock).toHaveBeenCalledWith("Please enter a valid email address.");
+
+  // Cleanup
+  alertMock.mockRestore();
 });
