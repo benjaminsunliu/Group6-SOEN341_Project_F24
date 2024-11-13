@@ -1,0 +1,29 @@
+Meeting Minutes
+
+Meeting Details
+Date: 12th of November 2024
+Time: 22:00-2:00
+Location: Google meet
+Attendees: Mustafa, Mehrad
+Absent: None(Only DB meeting)
+
+Agenda :
+- Working toward unit testing for Import and Export .csv file feature
+
+
+
+
+Discussion Points:
+- Item 1: Import and Export Unit testing 
+	Discussion Summary: Discussion regarding the unit testing for Import and Export feature, on InstructorDashboard page.
+	Action performed: We conducted research on unit testing for the specific feature, then started coding a unit testing 
+  file based on the criteria given on the dashboard page. The next step was to perform the unit testing.
+	
+
+Next Steps
+Upcoming Meetings: [Thursday November 14th, 2024]
+- Short discussion before the lab, preparation for the demo.
+
+Adjournment
+Time: Full adjournment at 02:30
+
