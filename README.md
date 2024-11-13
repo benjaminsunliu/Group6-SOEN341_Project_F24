@@ -18,7 +18,7 @@ University team projects often struggle with unequal contributions and lack acco
 ## Installation Instructions
 ### Prerequisites
 - Node.js and npm: Install Node.js, which includes npm, the Node package manager. You can download it from the official Node.js website.
-- MongoDB: Install MongoDB to manage the project's database. Download it from the official MongoDB website.
+- MongoDB: This project uses MongoDB Atlas, a cloud-based database service. You can set up a free cluster on MongoDB Atlas and use the connection string it provides to connect your application. For more details, visit the MongoDB Atlas website.
 ### Steps
 - Clone the Repository:`git clone https://github.com/benjaminsunliu/Group6-SOEN341_Project_F24.git`
 - Navigate to the Project Directory: `cd Group6-SOEN341_Project_F24`
@@ -69,7 +69,7 @@ Open your browser and navigate to http://localhost:3000 to use the application.
 ### Prerequisites
 
   - Make sure you have Node.js installed 
-  - Have MongoDB installed to see changes in the database
+  - Set up a MongoDB Atlas cluster and obtain the connection string to connect the project to the cloud database
   - Have the CSV files ready for testing, ensure the format is fname	lname	email	studentID	phone
 
     
