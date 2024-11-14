@@ -14,14 +14,14 @@ Discussion Points
 Task Distribution
 Discussion Summary:
 The primary focus for this sprint is to associate unit tests with key features of the peer evaluation website. 
-The goal is to ensure that the core functionalities such as Login, Account Creation, NavBar, and Dashboard are thoroughly tested.
+The goal is to ensure that the core functionalities such as Login, Account Creation and NavBar are thoroughly tested.
 
 Action Items:
 
 Ella will create unit tests for the Login and Create Account functionalities.
 Due Date: 10th November 2024
 
-Anthony will create unit tests for the NavBar and Dashboard.
+Anthony will create unit tests for the NavBar.
 Due Date: 10th November 2024
 
 Next Steps
