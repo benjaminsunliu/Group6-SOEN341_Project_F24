@@ -64,24 +64,5 @@ Open your browser and navigate to http://localhost:3000 to use the application.
 - [Anthony Phelps](https://github.com/oldgrandma101), BEng. Computer Engineering (C. Edge) (2022-2026)
 - [Ella Noyes](https://github.com/en4395), BEng. Computer Engineering (C. Edge) (2022-2026)
 
-### Running the Project
-
-### Prerequisites
-
-  - Make sure you have Node.js installed 
-  - Set up a MongoDB Atlas cluster and obtain the connection string to connect the project to the cloud database
-  - Have the CSV files ready for testing, ensure the format is fname	lname	email	studentID	phone
-
-    
-### Install Dependencies
-   - Run npm install command to install all required dependencies
-   - For file uploads, run npm install multer
-     
-### Run the Application
-   - Start the application with npm start and access it at http://localhost:3000.
-
-
-
 ### Conclusion
-
 This peer assessment platform aims to foster a collaborative and accountable environment for students working on team projects, ultimately leading to a more equitable and productive learning experience.
