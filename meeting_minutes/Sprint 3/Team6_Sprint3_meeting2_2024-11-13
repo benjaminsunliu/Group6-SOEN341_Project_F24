@@ -1,0 +1,27 @@
+Meeting Minutes
+
+Meeting Details
+Date: 13th of November 2024
+Time: 5:30-21:00
+Location: Google meet
+Attendees: Mustafa, Mehrad
+Absent: None(Only DB meeting)
+
+Agenda :
+- Working on the JWT not being decoded correctly and css parsing.
+
+
+
+
+Discussion Points:
+- Item 1: Css and JWT unexpected token.
+	Discussion Summary: Working on solving this issue by properly decoding JWT and parsing css.
+	Action performed: Successfully decoded it, however, new issue arised for import as it is failing to read elements. It is partially working. One reason for this is potentially the version of Jest.
+	
+
+Next Steps
+Upcoming Meetings: [Thursday November 14th, 2024]
+- Short discussion before the lab, preparation for the demo.
+
+Adjournment
+Time: Full adjournment at 21:00
