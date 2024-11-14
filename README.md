@@ -1,6 +1,6 @@
 # Group6-SOEN341_Project_F24
 
-For sprint 1 and 2 documentation, see the [wiki](https://github.com/benjaminsunliu/Group6-SOEN341_Project_F24/wiki).
+For sprint 1,2, and 3 documentation, see the [wiki](https://github.com/benjaminsunliu/Group6-SOEN341_Project_F24/wiki).
 ## Project Description
 University team projects often struggle with unequal contributions and lack accountability. This peer assessment platform enables students to evaluate their teammates across four key dimensions, promoting accountability and offering valuable feedback for both students and instructors.
 
