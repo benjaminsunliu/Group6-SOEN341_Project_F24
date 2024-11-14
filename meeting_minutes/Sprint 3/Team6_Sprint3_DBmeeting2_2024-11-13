@@ -9,6 +9,7 @@ Absent: None(Only DB meeting)
 
 Agenda :
 - Working on the JWT not being decoded correctly and css parsing.
+- Working on unit Testing and updating the InstructorDashboard unit testing
 
 
 
@@ -16,7 +17,8 @@ Agenda :
 Discussion Points:
 - Item 1: Css and JWT unexpected token.
 	Discussion Summary: Working on solving this issue by properly decoding JWT and parsing css.
-	Action performed: Successfully decoded it, however, new issue arised for import as it is failing to read elements. It is partially working. One reason for this is potentially the version of Jest.
+	Action performed: Successfully decoded it, however, new issue arised for import as it is failing to read elements. It is partially working. 
+	One reason for this is potentially the version of Jest.
 	
 
 Next Steps
