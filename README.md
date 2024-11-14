@@ -42,7 +42,7 @@ The frontend will run on http://localhost:3000.
 ```
 cd ../client
 npm install
-install Jest as a development dependency
+npm install --save-dev jest //install Jest as a development dependency
 npm test 
 ```
 
