@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import GroupList from "../components/GroupList";
 import RatingForm from "../components/RatingForm";
 import RatingList from "../components/RatingList";
+import CalendarComponent from '../components/CalendarComponent';
 
 
 const StudentDashboard = (props) => {
@@ -51,6 +52,13 @@ const StudentDashboard = (props) => {
             <RatingList/>
         </div>
       ),    
+    },
+    {
+      id: "calendar",
+      label: "Calendar",
+      content: <div class="Dashboard-contents">
+        <CalendarComponent/>
+      </div>,
     },
   ];
 
