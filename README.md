@@ -51,13 +51,13 @@ Open your browser and navigate to http://localhost:3000 to use the application.
 
 ## Technology Stack
 - **Node.js**
-- **React**
+- **React.js**
 - **Express**
 - **MongoDB**
 
 ## User Roles
 - **Students**: Can evaluate their teammates across the four assessment dimensions and access personal feedback reports.
-- **Instructors**: Can create and manage teams from their course roster (with the option to import team lists as a CSV file). After students have submitted their peer evaluations, instructors may view and export individualised reports.
+- **Instructors**: Can create and manage teams from their course roster (with the option to import team lists as a CSV file). After students have submitted their peer evaluations, instructors may view and export individualised reports. The Instructor can also export existing teams to a local device.
 
 ## Team Members
 ### Backend Development
