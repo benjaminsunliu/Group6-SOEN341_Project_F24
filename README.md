@@ -38,6 +38,14 @@ npm start
 ```
 The frontend will run on http://localhost:3000.
 
+- For Unit testing 
+```
+cd ../client
+npm install
+npm install --save-dev jest //install Jest as a development dependency
+npm test 
+```
+
 Accessing the Application:
 Open your browser and navigate to http://localhost:3000 to use the application.
 
