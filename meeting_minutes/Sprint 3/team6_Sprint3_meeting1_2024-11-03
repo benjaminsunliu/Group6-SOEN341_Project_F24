@@ -11,17 +11,39 @@ Agenda
 - Discussion about the plan for Sprint 3,
 - Discussion regarding user stories from Spring 1 and 2, and unit testing
 - Create user stories from Sprint 3's requirements on unit testing.
+- Proposing two new features for the project. 
 
 
 
-Discussion Points
+Discussion Points:
+
+Discussion Summary For User Stories:
+The team began by reviewing the existing user stories from the previous sprints (Sprint 1 and Sprint 2). The main focus was to ensure that we complete all deliverables for these user stories and move them into the completed tasks.
+After completing the discussion on past user stories, we shifted our attention to planning for Sprint 3.
+We revisited the features that were prioritized earlier and agreed on adding new user stories for features that we think will enhance the user experience.
+Specifically, we decided to include a calendar feature that will allow users to schedule, track, and manage tasks/events. Additionally, a feature for "forgot password" functionality was proposed and agreed upon.
+This would provide users an option to easily reset their passwords in case they forget them, which is an essential functionality for maintaining user access and security.
+
 - Item 1: User Stories
-	Discussion Summary: After discussion, we added new user stories to the Sprint plan acording to criteria for Spring 3.
-	Decisions Made: Additional user stories on Sprint 3.
-	
+	Discussion Summary: After discussion, we added new user stories to the Sprint plan acording to criteria for Spring 3. 
+	Since we already had finished a proposed feature in the past sprints, we thought we'd add the calendar feature as well as a third feature which is an option to forget password.
+
+	Decisions Made: Additional user stories on Sprint 3. We decided to work on the calendar and an option for password forgotten. 
+
+
+
+Discussion Summary For Unit Testing:
+In addition to breaking down the unit testing tasks for different components, the team also discussed which unit testing frameworks and languages would be best suited for our needs. 
+After reviewing a few options, the team agreed to use Jest as the primary testing framework for the project.
+Jest is a popular JavaScript testing framework that provides a simple and effective way to write tests, and it is well-suited for the web technologies we are using in the project.
+The team considered other testing frameworks as well, such as Mocha and Chai, but Jest was chosen because of its integrated test runner, easy-to-use syntax, and fast performance. 
+Additionally, Jest supports mocking and code coverage reports, which will be helpful for our unit testing tasks.
+The decision was made to use Jest to test all the JavaScript-based components of the application, including the forgot password, login, create account, and assessment rating features. 
+
+
 - Item 2: Unit Testing 
 	Discussion Summary: We have decided to split the unit testing of different 3 components to different teams. 
-	Decisions Made: A unit testing on import and export, on assessment rating, and login feature.
+	Decisions Made: A unit testing on forgot password, import/export, assessment rating, login feature, and create account.
 	
 
 
@@ -29,13 +51,17 @@ Action Items
 - Action Item 1: Login Unit Testing
   Assignee: Ella and Anthony
 
-- Action Item 2: Assessment Rating Unit Testing
+- Action Item 2: Create Account Unit Testing
+	Assignee: Ella and Anthony
+
+- Action Item 3: Assessment Rating Unit Testing
 	Assignee: Benjamin and Jordan
 
-- Action Item 3: Import and Export Unit Testing
+- Action Item 4: Forgot Password Testing
 	Assignee: Mustafa and Mehrad
 
-
+- Action Item 5: Import/Export Testing
+	Assignee: Mustafa and Mehrad
 
 
 Next Steps
