@@ -1,0 +1,57 @@
+Meeting Minutes
+
+Meeting Details
+Date: 24th of November 2024
+Time: 16:10
+Location: Discord Server Voice Channel
+Attendees: Benjamin, Jordan, Anthony, Ella, Mustafa, Mehrad
+Absent: None
+
+Agenda
+
+Discussion Points
+- Item 1: Which linter to use
+	Discussion Summary: Appendix C lists different static code analysis tools. We need to use one that’s 	suitable for React and integrates with GitHub.
+	Decisions Made: Use ESlint, as suggested in sprint description appendix. ESlint also integrates 	with GitHub.
+	Action Items: Perform static code analysis 
+
+- Item 2: Restructuring repo
+	Discussion Summary: We’re already using a structured architecture, but will have to clean up the 	server-side directories. We also need to separate CSS from jsx files in the frontend source code.
+	Decisions Made: Ella & Anthony will look at frontend code, Benjamin and Jordan will look at the 	backend directory structure
+	Action Items: Benjamin and Jordan will move the routes into a routes folder
+
+- Item 3: Completing unit tests
+	Discussion Summary: We need unit tests for every page and every core functionality. 
+	Decisions Made: Ella and Anthony will implement the remaining unit tests.
+	Action Items: 
+
+- Item 4: Password reset feature issue
+	Discussion Summary: Password reset feature is not working, it’s also hard to test
+	Decisions Made: Mustafa and Mehrad will work on completing this feature. Others will contribute if 	they need help.
+	Action Items:
+
+Action Items
+- Action Item 1: Static Code Analysis
+	Assignee: Jordan and Benjamin
+	Due Date: 26-11-2024
+
+- Action Item 2: Complete Unit Tests
+	Assignee: Ella and Anthony
+	Due Date: 26-11-2024
+
+- Action Item 3: Complete Instructor Dashboard Unit Test
+	Assignee: Mustafa and Mehrad
+	Due Date: 26-11-2024
+
+- Action Item 4: Complete Forgot Password Feature
+	Assignee: Mustafa and Mehrad
+	Due Date: 26-11-2024
+
+Next Steps
+Upcoming Meetings: Sunday 24th of November 6pm 
+Other Important Dates: 
+	- Presentation Due Tuesday 26th of December
+	- Report Due Monday 2nd of December
+
+Adjournment
+Time: 4:51pm
