@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+//forgotPassword method
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -9,15 +10,15 @@ const ForgotPassword = () => {
   const handlePasswordResetRequest = async (e) => {
     e.preventDefault();
     setMessage('');
-    
+
+    //running via a localhost !!
     try {
       const response = await axios.post('http://localhost:5050/api/request-reset-password', { email });
       setMessage(response.data.message);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Error requesting password reset');
+      setMessage(error.response?.data?.message || 'Requesting password reset');
     }
   };
-
   return (
     <div className="forgot-password">
       <h2>Forgot Password</h2>
@@ -28,7 +29,7 @@ const ForgotPassword = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
+        />      
         <button type="submit">Request Password Reset</button>
       </form>
       {message && <p>{message}</p>}
