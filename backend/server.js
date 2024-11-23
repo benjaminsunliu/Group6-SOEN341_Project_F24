@@ -119,8 +119,8 @@ app.post('/api/request-reset-password', async (req, res) => {
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.error('Error sending email:', err);
-        return res.status(500).json({ message: 'Error sending password reset email!' });
+        console.error('Sending email:', err);
+        return res.status(500).json({ message: ' Sending password reset email!' });
       }
       
       // Log the response if email is sent successfully
@@ -128,8 +128,8 @@ app.post('/api/request-reset-password', async (req, res) => {
       res.json({ message: 'Password reset link sent!' });
     });
   } catch (error) {
-    console.error('Error in password reset request:', error);
-    res.status(500).json({ message: 'Error in password reset request', error });
+    console.error('Password reset request:', error);
+    res.status(500).json({ message: 'Password reset request', error });
   }
 });
 
@@ -154,8 +154,8 @@ app.post('/api/reset-password/:token', async (req, res) => {
 
     res.json({ message: 'Password has been reset successfully' });
   } catch (error) {
-    console.error('Error resetting password:', error);
-    res.status(500).json({ message: 'Error resetting password', error });
+    console.error('Resetting password:', error);
+    res.status(500).json({ message: 'Resetting password', error });
   }
 });
 
