@@ -1,0 +1,29 @@
+Meeting Minutes
+
+Meeting Details
+Date: 19th of November 2024
+Time: 13:30-17:30
+Location: Google meet 
+Attendees: Mustafa, Mehrad
+Absent: None(Only DB meeting)
+
+Agenda :
+- Working on completing the forgot password.
+- Working on fixing the bug where team creation was affected by the code added in forgot password
+
+
+
+
+Discussion Points:
+- Item 1: Fix the bug
+	Discussion Summary: Identify the cause of the bug, and aim to fix it ensuring every other feature remains perfectly fine.
+	Action performed: Successfully debugged it, the code is now changed and all features work perfectly fine. The only problem is we are having difficulty as sending reset password from localhost is causing 
+  the free web-based email service providers to block our request for reset password. 
+	
+
+Next Steps
+Upcoming Meetings: [Friday November 22th, 2024]
+- Discuss what to do for the next step.
+
+Adjournment
+Time: Full adjournment at 18:00
