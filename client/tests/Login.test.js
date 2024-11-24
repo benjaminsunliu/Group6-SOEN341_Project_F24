@@ -204,3 +204,33 @@ test('shows alert when user is already logged in', () => {
   // Cleanup
   alertMock.mockRestore();
 });
+
+
+// **************************************************************************************************
+// TEST FOR FORGOT PASSWORD BUTTON
+// **************************************************************************************************
+test('renders ForgotPassword component when "Forgot Password?" button is clicked', () => {
+  // Render the Login page
+  render(
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  );
+
+  // Check that the "Forgot Password?" button is rendered
+  const forgotPasswordButton = screen.getByRole('button', { name: /forgot password\?/i });
+  expect(forgotPasswordButton).toBeInTheDocument();
+
+  // Click the "Forgot Password?" button
+  fireEvent.click(forgotPasswordButton);
+
+  // Check that the "ForgotPassword" component is displayed
+  expect(screen.getByRole('heading', { name: /forgot password/i })).toBeInTheDocument();
+
+  // Check the presence of the email input field and reset button
+  expect(screen.getByPlaceholderText(/enter your email/i)).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /request password reset/i })).toBeInTheDocument();
+
+  // Check the presence of the "Back to Login" button
+  expect(screen.getByRole('button', { name: /back to login/i })).toBeInTheDocument();
+});
