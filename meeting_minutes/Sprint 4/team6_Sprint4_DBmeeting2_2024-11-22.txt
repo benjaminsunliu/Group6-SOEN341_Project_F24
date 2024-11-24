@@ -1,0 +1,28 @@
+Meeting Minutes
+
+Meeting Details
+Date: 23th of November 2024
+Time: 12:00-15:30
+Location: Google meet 
+Attendees: Mustafa, Mehrad
+Absent: None(Only DB meeting)
+
+Agenda :
+- Working on InstructorDashboard unit testing
+
+
+Discussion Points:
+- Item 1: Fix and run the unit test
+
+	Discussion Summary: We identified the root cause of the issue that caused the unit test to fail.
+	Action performed: Changes were made to the instructorDashboard.test.js file to ensure the test runs successfully. Currently, 
+  the test passes for the import component of the page. However, the export component presents challenges and requires additional work to function correctly.
+
+	
+
+Next Steps
+Upcoming Meetings: [Sunday November 24th, 2024]
+- Complete the unit test
+
+Adjournment
+Time: Full adjournment at 16:00
