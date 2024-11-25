@@ -15,15 +15,15 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto'); 
 
 
+
+
 // Initialize express app
 const app = express();
 const port = 5050;
-app.use(express.json());
 
-// Use global middleware
+// Use middleware
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from your frontend origin
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
   credentials: true, // Enable cookies to be sent with requests
 }));
 app.use(bodyParser.json());
@@ -35,50 +35,6 @@ mongoose.connect("mongodb+srv://login:moon@logincluster.thvtn.mongodb.net/?retry
 }).then(() => console.log('MongoDB connected successfully.'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-
-//TEMPORARY
-const { authenticateToken } = require('./middleware/authenticateToken');
-const { isInstructor } = require('./middleware/isInstructor');
-
-// Model imports
-const User = require('./models/user');
-const Team = require('./models/team');
-const Student = require('./models/student');
-const Rating = require('./models/rating');
-
-// Following are API Paths
-
-// Login API
-const authenticationRoutes = require('./routes/authentication');
-// Create Account API
-
-const createAccountRoutes = require('./routes/createAccount');
-
-//Create Team API
-const createTeamRouter = require('./routes/createTeam');
-app.use(createTeamRouter);  // Use the router for team routes
-
-// get-teams api
-const getTeamsRoute = require('./routes/get-teams');  // Import the route
-
-// get students api
-const getStudentsRoute = require('./routes/students');
-
-//rate studeents api
-const ratingTheStudentRoute = require('./routes/ratingTheStudent');
-
-//get rated students api
-const ratedStudentsRoute = require('./routes/rated-members');
-
-//students get their teams members api
-const teamMemberRoute = require('./routes/team-members');
-
-//students get their ratings api
-const ratingRoutes = require('./routes/user-ratings');
-
-//instructors get their student's ratings api
-const instructorRoutes = require('./routes/instructor-rating');
-
 // JWT secret
 const jwtSecret = 'your_jwt_secret';
 
@@ -89,6 +45,56 @@ const transporter = nodemailer.createTransport({
     user: 'your_email@gmail.com', // Replace with your email
     pass: 'your_email_password' // Replace with your email password or app password
   }
+});
+
+// User schema with roles (student or instructor)
+const userSchema = new mongoose.Schema({
+  fName: { type: String, required: true },
+  lName: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['student', 'instructor'], required: true },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
+});
+
+// Team schema
+const teamSchema = new mongoose.Schema({
+  name: { type: String, required: true }, // Team name
+  userId: { type: String, required: true }, // Instructor's email
+  members: [{ type: String, required: true }], // List of team members' emails
+});
+
+// Student Schema
+const studentSchema = new mongoose.Schema({
+  fname: { type: String, required: true },
+  lname: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  studentID: { type: String, required: true, unique: true },
+  phone: { type: String, required: true },
+});
+
+// Rating Schema
+const ratingSchema = new mongoose.Schema({
+  raterEmail: { type: String, required: true}, //Email of the student rating
+  ratedEmail: { type: String, required: true }, // Email of the student being rated
+  cooperation: { type: Number, required: true, min: 1, max: 5 }, // Rating for cooperation
+  conceptualContribution: { type: Number, required: true, min: 1, max: 5 }, // Rating for conceptual contribution
+  practicalContribution: { type: Number, required: true, min: 1, max: 5 }, // Rating for practical contribution
+  workEthic: { type: Number, required: true, min: 1, max: 5 }, // Rating for work ethic
+  comments: { type: String, maxlength: 500 }, // Optional comments about the rating
+});
+
+// Create the Rating model
+const Rating = mongoose.model('Rating', ratingSchema);
+module.exports = Rating;
+
+// Password hashing middleware
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
 });
 
 // Password Reset Request
@@ -153,41 +159,137 @@ app.post('/api/reset-password/:token', async (req, res) => {
   }
 });
 
-// For login and log out
-app.use('/api', authenticationRoutes);
 
-// For account creation
-app.use('/api', createAccountRoutes);
+const database = mongoose.connection;
 
-// For instructor create team
-app.use('/api', createTeamRouter);
+const usersCollection = database.collection('users');
+const teamsCollection = database.collection('teams');
 
-// get teams based on role
-app.use('/api', getTeamsRoute);
+const User = mongoose.model('User', userSchema);
+const Student = mongoose.model('Student', studentSchema);
+const Team = mongoose.model('Team', teamSchema);
 
-//get students
-app.use('/api', getStudentsRoute);
+// Middleware to authenticate JWT tokens
+const authenticateToken = (req, res, next) => {
+  const token = req.cookies.token;  // Access token from the cookie
+  if (!token) return res.sendStatus(401); // No token, unauthorized
 
-//student rating feature
-app.use('/api', ratingTheStudentRoute);
+  jwt.verify(token, jwtSecret, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
 
-//get rated students
-app.use('/api', ratedStudentsRoute);
+// Middleware to ensure only instructors can access certain routes
+const isInstructor = (req, res, next) => {
+  if (req.user.role !== 'instructor') {
+    return res.status(403).json({ message: 'Access denied: Instructor role required' });
+  }
+  next();
+};
 
-//get list of student team members
-app.use('/api', teamMemberRoute);
+// User login route
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
 
-//students get their ratings
-app.use('/api', ratingRoutes);
+  try {
+    const user = await User.findOne({ email });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
 
-//instructors get their student's ratings
+    // Generate JWT
+    const token = jwt.sign({ userId: user._id, role: user.role, fName: user.fName, lName: user.lName, email: user.email}, jwtSecret, { expiresIn: '1h' });
 
-app.use('/api/instructor', instructorRoutes);
+    // Set cookie options
+    const cookieOptions = {
+      httpOnly: false,
+      secure: false, 
+      maxAge: 3600000, // 1 hour
+    };
+
+    // Set the cookie
+    res.cookie('token', token, cookieOptions);
+
+    // Return a success message
+    res.status(200).json({ message: 'Login successful!', role: user.role,token: token });
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in', error });
+  }
+});
+
+// User logout route
+app.post('/api/logout', (req, res) => {
+  // Clear the cookie that contains the JWT token
+  res.clearCookie('token', {
+    httpOnly: false,
+    secure: false,
+  });
+  
+  res.status(200).json({ message: 'Logout successful!' });
+});
+
+
+// User registration route
+app.post('/api/create-account', async (req, res) => {
+  const {fName, lName, email, password, role} = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log(`Account creation failed: ${email} is already in use.`);
+      return res.status(409).json({ message: 'Email already in use' });
+    }
+
+    const user = new User({fName, lName, email, password, role});
+    await user.save();
+
+    console.log(`Account created successfully for ${email}.`);
+    res.status(201).json({ message: 'Account created successfully!' });
+  } catch (error) {
+    console.error('Error creating account:', error);
+    res.status(500).json({ message: 'Error creating account', error });
+  }
+});
 
 
 
+// Instructor route to create teams
+app.post('/api/create-team', authenticateToken, isInstructor, async (req, res) => {
+  const { groupName, groupMembers, userId} = req.body;
 
+  try {
+    const team = new Team({name: groupName, userId: userId, members: groupMembers});
+    await team.save();
+    console.log(`Team created successfully: ${groupName}`);
+    res.status(201).json({ message: 'Team created successfully!' });
+  } catch (error) {
+    console.error('Error creating team:', error);
+    res.status(400).json({ message: 'Error creating team', error });
+  }
+});
 
+// Get the teams based on role
+app.get('/api/get-teams', authenticateToken, async (req, res) => {
+  try {
+    let teams;
+
+    if (req.user.role === 'instructor') {
+      // Fetch teams where the instructor is the user
+      teams = await Team.find({ userId: req.user.userId });
+    } else if (req.user.role === 'student') {
+      // Fetch teams where the student's email is in the members array
+      teams = await Team.find({ members: req.user.email });
+    } else {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    res.status(200).json({ teams });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching teams', error });
+  }
+});
 
 
 //Import groups as CSV file
@@ -250,6 +352,19 @@ app.post('/api/import-roster', authenticateToken, isInstructor, upload.single('f
     });
 });
 
+app.get('/api/students', authenticateToken, isInstructor, async (req, res) => {
+  try {
+    const students = await Student.find({});
+    res.status(200).json(students);
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ message: 'Error fetching students', error });
+  }
+});
+
+
+
+
 //Export groups as CSV file
 //api/export-groups
 app.get('/api/export-groups', authenticateToken, isInstructor, async (req, res) => {
@@ -279,6 +394,121 @@ app.get('/api/export-groups', authenticateToken, isInstructor, async (req, res) 
     res.status(500).json({ message: 'Error exporting groups', error });
   }
 });
+
+
+
+//Instructor Dashboard route
+
+app.post('/api/instructor-dashboard', authenticateToken, isInstructor, async (req, res) => {
+  res.status(200).json({ message: 'Welcome, instructor!' });
+});
+
+
+//rating creation api
+app.post('/api/rate', async (req, res) => {
+  const { raterEmail, ratedEmail, cooperation, conceptualContribution, practicalContribution, workEthic, comments } = req.body;
+
+  try {
+    // Check if the rater has already rated this teammate
+    const alreadyRated = await Rating.findOne({ raterEmail, ratedEmail });
+    
+    if (alreadyRated) {
+      return res.status(400).json({ message: 'You have already rated this teammate.' });
+    }
+
+    // Save the rating
+    const newRating = new Rating({
+      raterEmail,
+      ratedEmail,
+      cooperation,
+      conceptualContribution,
+      practicalContribution,
+      workEthic,
+      comments,
+    });
+
+    await newRating.save();
+    res.json({ message: 'Rating submitted successfully!' });
+  } catch (error) {
+    console.error("Error submitting rating:", error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Endpoint to get rated members for a specific rater
+app.get('/api/rated-members/:raterEmail', authenticateToken, async (req, res) => {
+  const { raterEmail } = req.params;
+  
+  try {
+    const ratedMembers = await Rating.find({ raterEmail });
+    const ratedEmails = ratedMembers.map(rating => rating.ratedEmail);
+    res.json({ ratedEmails });
+  } catch (error) {
+    console.error("Error fetching rated members:", error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+// api for students to get their teams and team members
+app.get('/api/team-members', authenticateToken, async (req, res) => {
+  try {
+    const teams = await Team.find({ members: req.user.email });
+    const members = teams.flatMap(team => team.members); // Extract all members' emails
+    res.status(200).json({ members: [...new Set(members)] }); // Remove duplicates
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching team members', error });
+  }
+});
+
+//api for students to get their ratings based on their email
+app.get('/api/user-ratings/:email', authenticateToken, async (req, res) => {
+  const { email } = req.params;
+  try {
+    const ratings = await Rating.find({ ratedEmail: email });
+    res.json(ratings);
+  } catch (error) {
+    console.error("Error fetching ratings:", error);
+    res.status(500).json({ message: "Failed to fetch ratings" });
+  }
+});
+
+//api for instructors to get their students' ratings
+app.get('/api/instructor/:_id/ratings', authenticateToken, async (req, res) => {
+  const instructorId = req.params._id;  // Use _id from the URL
+
+  try {
+      // Find all teams where userId matches the instructor's _id
+      const teams = await Team.find({ userId: instructorId });
+
+      // Get all student emails from the teams
+      const studentEmails = teams.flatMap(team => team.members);
+      const uniqueStudentEmails = [...new Set(studentEmails)]; // Removes duplicate emails
+
+      // Get ratings for each unique student email
+      const ratingsPromises = uniqueStudentEmails.map(email =>
+          Rating.find({ ratedEmail: email })
+      );
+
+      // Wait for all ratings to be fetched
+      const ratingsResults = await Promise.all(ratingsPromises);
+
+      // Structure the ratings by each student's email
+      const ratingsByStudent = uniqueStudentEmails.reduce((acc, email, index) => {
+          acc[email] = ratingsResults[index];
+          return acc;
+      }, {});
+
+      // Respond with both team and rating information
+      res.json({ teams, ratingsByStudent });
+  } catch (error) {
+      res.status(500).json({ error: 'Error fetching teams and ratings' });
+  }
+});
+
+
+
+
 
 // Start the server
 app.listen(port, () => {
