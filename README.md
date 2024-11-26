@@ -69,7 +69,7 @@ Open your browser and navigate to http://localhost:3000 to use the application.
 - [Mehrad Mostaan](https://github.com/Mehrad25Software), BEng. Software Engineering (C.Edge) (2022-2026)
   
 ### Frontend Development
-- [Anthony Phelps](https://github.com/oldgrandma101), BEng. Computer Engineering (C. Edge) (2022-2026)
+- [Anthony Phelps](https://github.com/oldgrandma101), BEng. Computer Engineering (COOP) (2022-2026)
 - [Ella Noyes](https://github.com/en4395), BEng. Computer Engineering (C. Edge) (2022-2026)
 
 ### Conclusion
