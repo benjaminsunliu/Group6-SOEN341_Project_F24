@@ -3,7 +3,7 @@ import Button from "./Button";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import "./GroupForm.css"
+import ".//css/GroupForm.css"
 import { useState, useEffect } from "react";
 import axios from "axios";
 

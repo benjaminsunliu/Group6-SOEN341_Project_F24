@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
-import "./RatingForm.css";
+import ".//css/RatingForm.css";
 
 const RatingForm = () => {
   const [members, setMembers] = useState([]);
