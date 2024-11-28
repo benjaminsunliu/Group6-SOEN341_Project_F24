@@ -4,7 +4,7 @@ For sprint 1, 2, 3 and 4 documentation, see the [wiki](https://github.com/benjam
 ## Project Description
 University team projects often struggle with unequal contributions and lack accountability. This peer assessment platform enables students to evaluate their teammates across four key dimensions, promoting accountability and offering valuable feedback for both students and instructors.
 
-## Features
+## Core Features
 - **Comprehensive Four-Dimension Assessments**:
 	- _Cooperation_: Evaluates a student’s ability to take initiative, communicate, assist peers, and contribute to meetings and project planning.
 	- _Conceptual Contribution_: Assesses a student’s involvement in research, design, and contributing ideas.
@@ -14,6 +14,23 @@ University team projects often struggle with unequal contributions and lack acco
 - **Anonymous Peer Evaluations**: Encourages fair and honest feedback.
 - **Peer Feedback Summaries for Instructors**: Helps instructors assess team dynamics and evaluate each student’s performance and contributions.
 - **Personal Feedback Report for Students**: Offers students constructive feedback on their contributions, encouraging personal growth.
+
+## Proposed Features
+- **Editable Calendar for Students**
+  	- Simple calendar designed to help students manage their schedules effectively.
+  	- Tasks can be added to selected dates
+- **Chill Tab For Students**
+	- Chill Minigames: 
+ 		- Bubble Pop: Pop bubbles floating across the screen for points, providing a light distraction to relieve stress.
+		- Emoji Match: Match pairs of emojis in a soothing memory game, designed to relax the mind.
+  	- Chill Guy Jokes:
+  	  	- A collection of lighthearted, relatable "chill guy" moments that offer students a quick laugh and an escape from serious tasks.
+		- The humor aims to foster positivity and lighten the mood, promoting better mental well-being.
+  	- Background Music:
+  	  	- Relaxing soundtrack to reduce stress, stay focused, or simply unwind during study breaks.
+- **Password Recovery**
+  	- Email-Based Recovery:
+  	  	- Allow users to recover their password using their emails.
 
 ## Installation Instructions
 ### Prerequisites
@@ -40,9 +57,7 @@ The frontend will run on http://localhost:3000.
 
 - For Unit testing 
 ```
-cd ../client
-npm install
-npm install --save-dev jest //install Jest as a development dependency
+cd client or cd backend
 npm test 
 ```
 
