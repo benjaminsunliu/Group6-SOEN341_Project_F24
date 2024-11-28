@@ -2,7 +2,7 @@
     I followed this tutorial: https://uploadcare.com/blog/how-to-upload-file-in-react/
     to set up the uploader!
 */
-import "./SingleFileUploader.css";
+import "./css/SingleFileUploader.css";
 import Button from "./Button";
 import { useState } from "react";
 

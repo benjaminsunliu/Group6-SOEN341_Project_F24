@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const ChillMusicPlayer = ({ shouldPlay }) => {
   const audio = useRef(new Audio("/audio/HinokiWood.mp3")).current;
