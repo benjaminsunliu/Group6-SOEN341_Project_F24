@@ -9,6 +9,7 @@ import GroupList from "../components/GroupList";
 import RatingForm from "../components/RatingForm";
 import RatingList from "../components/RatingList";
 import CalendarComponent from '../components/CalendarComponent';
+import ChillGuyJokes from '../components/chill';
 
 
 const StudentDashboard = (props) => {
@@ -58,6 +59,13 @@ const StudentDashboard = (props) => {
       label: "Calendar",
       content: <div class="Dashboard-contents">
         <CalendarComponent/>
+      </div>,
+    },
+    {
+      id: "chill",
+      label: "Chill",
+      content: <div class="Dashboard-contents">
+        <ChillGuyJokes/>
       </div>,
     },
   ];

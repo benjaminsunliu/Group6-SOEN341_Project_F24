@@ -3,7 +3,7 @@ const Home = (props) => {
   return (
     <>
       <div class="body" className="body">
-        <h1 className="home">Welcome to RateMyPeers! </h1>
+        <h1 className="home">Welcome to RateMyChillmates! </h1>
         <img src="./images/home.png" alt="home" width="500"/>
         <br/>
         <p class="home" className="home">

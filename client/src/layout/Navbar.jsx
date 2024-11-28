@@ -120,7 +120,7 @@ const Navbar = (props) => {
       <nav class="navbar bg-primary navbar-expand-lg ">
         <div class="container-fluid">
           <a class="navbar-brand" href="/">
-            RateMyPeers
+            RateMyChillmates
             <img src="/images/logo.png" alt="logo" width="50px"/>
           </a>
           <button
