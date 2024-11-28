@@ -12,6 +12,7 @@ import CalendarComponent from '../components/CalendarComponent';
 import ChillGuyJokes from '../components/chill';
 import EmojiMatch from '../components/emojimatch';
 import BubblePop from '../components/bubblepop';
+import MusicPlayer from '../components/musicPlayer';
 
 const StudentDashboard = (props) => {
 
@@ -65,7 +66,9 @@ const StudentDashboard = (props) => {
     {
       id: "chill",
       label: "Chill",
-      content: <div class="Dashboard-contents">
+      content: (activeTab) => (
+      <div class="Dashboard-contents">
+        {activeTab === "chill" && <MusicPlayer shouldPlay={activeTab === "chill"} />}
         <h1>Get some chill jokes:</h1>
         <ChillGuyJokes/>  
         <br/>
@@ -73,7 +76,8 @@ const StudentDashboard = (props) => {
         <EmojiMatch/>
         <br/>
         <BubblePop/>
-      </div>,
+      </div>
+      ),
     },
   ];
 
