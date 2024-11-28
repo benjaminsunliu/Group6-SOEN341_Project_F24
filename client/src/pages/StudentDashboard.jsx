@@ -10,7 +10,8 @@ import RatingForm from "../components/RatingForm";
 import RatingList from "../components/RatingList";
 import CalendarComponent from '../components/CalendarComponent';
 import ChillGuyJokes from '../components/chill';
-
+import EmojiMatch from '../components/emojimatch';
+import BubblePop from '../components/bubblepop';
 
 const StudentDashboard = (props) => {
 
@@ -65,7 +66,13 @@ const StudentDashboard = (props) => {
       id: "chill",
       label: "Chill",
       content: <div class="Dashboard-contents">
-        <ChillGuyJokes/>
+        <h1>Get some chill jokes:</h1>
+        <ChillGuyJokes/>  
+        <br/>
+        <h1>Play some chill games:</h1>
+        <EmojiMatch/>
+        <br/>
+        <BubblePop/>
       </div>,
     },
   ];
