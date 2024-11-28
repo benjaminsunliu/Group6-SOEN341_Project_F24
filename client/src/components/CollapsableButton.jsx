@@ -1,5 +1,5 @@
 // this collapsable button component will expand and display the contents of the array passed to it
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const CollapsableButton = (props) => {
   const [clicked, setClicked] = useState(false);

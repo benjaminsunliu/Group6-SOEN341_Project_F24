@@ -1,17 +1,16 @@
 import StudentChecklist from "./StudentChecklist";
 import Button from "./Button";
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import "./css/GroupForm.css"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const GroupForm = ({ students }) => {
 
     const [groupMembers, setGroupMembers] = useState([]);
     const [groupName, setGroupName] = useState('');
-    const [groups, setGroups] = useState([]);
+    const [,setGroups] = useState([]);
     const [groupedStudents, setStudentsAsGrouped] = useState([]);
 
     const selectionHandler = (e) => { 
@@ -28,9 +27,6 @@ const GroupForm = ({ students }) => {
             }
         })
     }
-
-    const navigate = useNavigate();
-    
 
     const formGroup = async (e) => {
         e.preventDefault(); // Prevent page reload

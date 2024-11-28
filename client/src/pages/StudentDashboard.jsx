@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import "./css/Dashboard.css";
 import TabContainer from "../components/TabContainer";
-import Button from "../components/Button";
 import GroupList from "../components/GroupList";
 import RatingForm from "../components/RatingForm";
 import RatingList from "../components/RatingList";

@@ -6,7 +6,6 @@ import "./css/RatingForm.css";
 
 const RatingForm = () => {
   const [members, setMembers] = useState([]);
-  const [loggedInEmail, setLoggedInEmail] = useState('');
   const [selectedEmail, setSelectedEmail] = useState('');
   const [cooperationRating, setCooperationRating] = useState(1);
   const [conceptualRating, setConceptualRating] = useState(1);

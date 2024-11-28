@@ -39,7 +39,7 @@ const ChillGuyJokes = () => {
 
     return (
         <div style={{ padding: "20px", textAlign: "center" }}>
-            <img src="./images/logo.png" width="100px"></img>
+            <img src="./images/logo.png" width="100px" alt="chill guy"></img>
             <h2>I'm Just a Chill Guy</h2>
             <p style={{ fontSize: "18px", fontStyle: "italic" }}>
                 {joke || "Click the button to hear a relatable 'chill guy' moment!"}
