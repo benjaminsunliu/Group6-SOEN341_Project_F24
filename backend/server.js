@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const csv = require('csv-parser');
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
@@ -44,7 +43,7 @@ const { isInstructor } = require('./middleware/isInstructor');
 const User = require('./models/user');
 const Team = require('./models/team');
 const Student = require('./models/student');
-const Rating = require('./models/rating');
+//const Rating = require('./models/rating');
 
 // Following are API Paths
 
@@ -78,9 +77,6 @@ const ratingRoutes = require('./routes/user-ratings');
 
 //instructors get their student's ratings api
 const instructorRoutes = require('./routes/instructor-rating');
-
-// JWT secret
-const jwtSecret = 'your_jwt_secret';
 
 // Nodemailer transporter configuration
 const transporter = nodemailer.createTransport({

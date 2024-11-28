@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { jwtDecode } from "jwt-decode";
-import "./RatingForm.css";
+import "./css/RatingForm.css";
 
 const RatingForm = () => {
   const [members, setMembers] = useState([]);
-  const [loggedInEmail, setLoggedInEmail] = useState('');
   const [selectedEmail, setSelectedEmail] = useState('');
   const [cooperationRating, setCooperationRating] = useState(1);
   const [conceptualRating, setConceptualRating] = useState(1);

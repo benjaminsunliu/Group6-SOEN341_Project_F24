@@ -2,14 +2,16 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-import "./Dashboard.css";
+import "./css/Dashboard.css";
 import TabContainer from "../components/TabContainer";
-import Button from "../components/Button";
 import GroupList from "../components/GroupList";
 import RatingForm from "../components/RatingForm";
 import RatingList from "../components/RatingList";
 import CalendarComponent from '../components/CalendarComponent';
-
+import ChillGuyJokes from '../components/chill';
+import EmojiMatch from '../components/emojimatch';
+import BubblePop from '../components/bubblepop';
+import MusicPlayer from '../components/musicPlayer';
 
 const StudentDashboard = (props) => {
 
@@ -59,6 +61,22 @@ const StudentDashboard = (props) => {
       content: <div class="Dashboard-contents">
         <CalendarComponent/>
       </div>,
+    },
+    {
+      id: "chill",
+      label: "Chill",
+      content: (activeTab) => (
+      <div class="Dashboard-contents">
+        {activeTab === "chill" && <MusicPlayer shouldPlay={activeTab === "chill"} />}
+        <h1>Get some chill jokes:</h1>
+        <ChillGuyJokes/>  
+        <br/>
+        <h1>Play some chill games:</h1>
+        <EmojiMatch/>
+        <br/>
+        <BubblePop/>
+      </div>
+      ),
     },
   ];
 

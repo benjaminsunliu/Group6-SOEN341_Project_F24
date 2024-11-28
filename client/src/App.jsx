@@ -8,7 +8,6 @@ import CreateAccount from "./pages/CreateAccount";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InstructorDashboard from "./pages/InstructorDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
-import Button from "./components/Button";
 
 function App() {
   return (
