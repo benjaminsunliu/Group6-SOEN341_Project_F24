@@ -9,8 +9,7 @@ const Home = (props) => {
         <p class="home" className="home">
         This is a platform where students can rate their peers based on their performance in group projects. This platform is designed to help students find the best group members for their projects.
         </p>
-        <main className="body" class="body">
-        </main>
+        
       </div>
     </>
   );

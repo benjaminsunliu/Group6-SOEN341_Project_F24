@@ -53,8 +53,7 @@ const Login = (props) => {
 
   return (
     <>
-      <div className="body">
-        <main className="body">
+      <div class="body" className="body">
           {!showForgotPassword ? (
             <>
               <form onSubmit={loginFunc}>
@@ -116,7 +115,6 @@ const Login = (props) => {
           ) : (
             <ForgotPassword setShowForgotPassword={setShowForgotPassword} />
           )}
-        </main>
       </div>
     </>
   );
