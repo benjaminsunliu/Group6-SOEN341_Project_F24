@@ -61,9 +61,6 @@ cd client or cd backend
 npm test 
 ```
 
-Accessing the Application:
-Open your browser and navigate to http://localhost:3000 to use the application.
-
 ## Technology Stack
 - **Node.js**
 - **React.js**
@@ -76,16 +73,16 @@ Open your browser and navigate to http://localhost:3000 to use the application.
 
 ## Team Members
 ### Backend Development
-- [Benjamin Liu](https://github.com/benjaminsunliu), BEng. Software Engineering (COOP) (2023-2027)
-- [Jordan Yeh](https://github.com/YehJordan), BEng. Software Engineering (COOP) (2023-2027)
+- [Benjamin Liu - 40280899](https://github.com/benjaminsunliu), BEng. Software Engineering (COOP) (2023-2027)
+- [Jordan Yeh - 40283075](https://github.com/YehJordan), BEng. Software Engineering (COOP) (2023-2027)
 
 ### Database Development
-- [Mustafa Al Awadi](https://github.com/MustafaHunter), BCompSc. Bachelor of Computer Science (2022-2025)
-- [Mehrad Mostaan](https://github.com/Mehrad25Software), BEng. Software Engineering (C.Edge) (2022-2026)
+- [Mustafa Al Awadi - 40217764](https://github.com/MustafaHunter), BCompSc. Bachelor of Computer Science (2022-2025)
+- [Mehrad Mostaan - 40248205](https://github.com/Mehrad25Software), BEng. Software Engineering (C.Edge) (2022-2026)
   
 ### Frontend Development
-- [Anthony Phelps](https://github.com/oldgrandma101), BEng. Computer Engineering (COOP) (2022-2026)
-- [Ella Noyes](https://github.com/en4395), BEng. Computer Engineering (C. Edge) (2022-2026)
+- [Anthony Phelps - 40132295](https://github.com/oldgrandma101), BEng. Computer Engineering (COOP) (2022-2026)
+- [Ella Noyes - 40181357](https://github.com/en4395), BEng. Computer Engineering (C. Edge) (2022-2026)
 
 ### Conclusion
 This peer assessment platform aims to foster a collaborative and accountable environment for students working on team projects, ultimately leading to a more equitable and productive learning experience.
